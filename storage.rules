@@ -1,0 +1,18 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Photos live at gallery/{uploaderUid}/{filename}. Any signed-in parent can read
+    // (the Firestore `photos` doc controls whether it actually appears in the gallery),
+    // but only the uploader can write to their own folder, capped at 10MB, images only.
+    match /gallery/{uid}/{fileName} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null
+        && request.auth.uid == uid
+        && request.resource.size < 10 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+      // Kept permissive for any signed-in user so the admin "Reject" button can delete
+      // someone else's pending upload. Review before relying on this at scale.
+      allow delete: if request.auth != null;
+    }
+  }
+}

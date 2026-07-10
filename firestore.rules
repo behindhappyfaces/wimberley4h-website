@@ -1,0 +1,61 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() { return request.auth != null; }
+    function isAdmin() {
+      return isSignedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // Family/parent profiles — created on sign-up, editable only by the owner.
+    match /users/{uid} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn() && request.auth.uid == uid;
+      allow update: if isSignedIn() && request.auth.uid == uid;
+      allow delete: if false;
+    }
+
+    // Officer/approver list — add entries manually in the console (uid as the doc ID).
+    match /admins/{uid} {
+      allow read: if isSignedIn();
+      allow write: if false;
+    }
+
+    // Gallery photo metadata. Anyone signed in can see approved photos or their own
+    // pending uploads; only admins can approve/reject; uploader or admin can delete.
+    match /photos/{photoId} {
+      allow read: if isSignedIn() && (
+        resource.data.status == 'approved' ||
+        resource.data.uploaderUid == request.auth.uid ||
+        isAdmin()
+      );
+      allow create: if isSignedIn()
+        && request.resource.data.uploaderUid == request.auth.uid
+        && request.resource.data.status == 'pending';
+      allow update: if isAdmin();
+      allow delete: if isAdmin() || (isSignedIn() && resource.data.uploaderUid == request.auth.uid);
+    }
+
+    // RSVPs, one doc per family per meeting. A family can only write its own response.
+    match /rsvps/{meetingId}/responses/{uid} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn() && request.auth.uid == uid;
+    }
+
+    // Community Board: family businesses, local events, meetups/playdates.
+    // Approved posts are public (no sign-in needed to browse); posting requires an
+    // account and starts as 'pending'; only admins can approve/edit; the poster or
+    // an admin can delete. Any signed-in user may toggle only the `going` field
+    // (RSVP-style) on a meetup without being able to edit the rest of the post.
+    match /community_posts/{postId} {
+      allow read: if resource.data.status == 'approved'
+        || (isSignedIn() && (resource.data.ownerUid == request.auth.uid || isAdmin()));
+      allow create: if isSignedIn()
+        && request.resource.data.ownerUid == request.auth.uid
+        && request.resource.data.status == 'pending';
+      allow update: if isAdmin()
+        || (isSignedIn() && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['going']));
+      allow delete: if isAdmin() || (isSignedIn() && resource.data.ownerUid == request.auth.uid);
+    }
+  }
+}
