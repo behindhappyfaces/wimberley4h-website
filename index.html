@@ -142,6 +142,19 @@
       margin-left: auto;
     }
 
+    /* ── SITE-WIDE ANNOUNCEMENT BANNER ── */
+    .announce-banner {
+      background: var(--barn);
+      color: var(--white);
+      text-align: center;
+      padding: 10px 16px;
+      font-size: .85rem;
+      font-weight: 600;
+      letter-spacing: .2px;
+    }
+    .announce-banner a { color: var(--white); text-decoration: underline; font-weight: 800; }
+    .announce-banner a:hover { text-decoration: none; }
+
     /* ── PAGE WRAPPER ── */
     .page { display: none; }
     .page.active { display: block; }
@@ -1002,6 +1015,10 @@
 </head>
 <body>
 
+<div class="announce-banner">
+  📅 RSVP by <strong>August 4</strong> for the Hays County 4-H Awards Banquet — "Back to the Farm," Aug. 15, Dripping Springs Ranch Park &nbsp;·&nbsp; <a href="back-to-the-farm-flyer.pdf" target="_blank">View Flyer ↗</a>
+</div>
+
 <!-- ═══ HEADER ═══ -->
 <header>
   <div class="nav-inner">
@@ -1105,6 +1122,8 @@
           <li><span class="date-label">June 23</span>  Deadline — Turkey Orders, Steer/Heifer Tags, Sheep/Goat Tags</li>
           <li><span class="date-label">June 27</span>  Steer / Heifer Validation, 8–11 AM, DSRP</li>
           <li><span class="date-label">July 12–18</span> Shooting Sports State Games, San Antonio</li>
+          <li><span class="date-label">Aug. 4</span>  <a class="date-late" href="https://docs.google.com/forms/d/1NOaI_yVDT9r-M94AyTkKBsqPJultRVQr-GXBg7lg5C0/viewform?edit_requested=true" target="_blank">RSVP DEADLINE</a> Hays County 4-H Awards Banquet</li>
+          <li><span class="date-label">Aug. 15</span>  Hays County 4-H Awards Banquet "Back to the Farm," 4–7 PM, Dripping Springs Ranch Park, dinner provided — <a href="back-to-the-farm-flyer.pdf" target="_blank">View Flyer ↗</a></li>
           <li><span class="date-label">Sept. 1</span>  Swine Tag Orders Open</li>
           <li><span class="date-label">Sept. 14</span> First Monthly Meeting, Wimberley VFW, 7 PM</li>
           <li><span class="date-label">Sept. 30</span> Swine Tag Orders Close</li>
@@ -1139,7 +1158,7 @@
       </div>
       <div class="tree-stem"></div>
       <div class="tree-tier tier-cardinal">
-        <div class="tree-branch"><a href="#" class="officer-card" onclick="showOfficerBio('delegate1'); return false;"><div class="officer-role">Council Delegate</div><div class="officer-name">Trace Hung</div><div class="officer-hint">View bio →</div></a></div>
+        <div class="tree-branch"><a href="#" class="officer-card" onclick="showOfficerBio('delegate1'); return false;"><div class="officer-role">Council Delegate</div><div class="officer-name">Trace Hunt</div><div class="officer-hint">View bio →</div></a></div>
         <div class="tree-branch"><a href="#" class="officer-card" onclick="showOfficerBio('delegate2'); return false;"><div class="officer-role">Council Delegate</div><div class="officer-name">Megan Swientek</div><div class="officer-hint">View bio →</div></a></div>
         <div class="tree-branch"><a href="#" class="officer-card" onclick="showOfficerBio('jrdelegate'); return false;"><div class="officer-role">Jr. Council Delegate</div><div class="officer-name">Barrett Hunt</div><div class="officer-hint">View bio →</div></a></div>
       </div>
@@ -1164,6 +1183,7 @@
         <div class="officer-name">Judy Walker</div>
       </div>
     </div>
+    <p style="text-align:center; font-size:.85rem; color:var(--muted); margin-top:10px">Contact: <a href="mailto:wimberley4h@gmail.com">wimberley4h@gmail.com</a></p>
 
     <!-- Quick Links -->
     <h2 class="section-title tag-cardinal" style="margin-top:36px">Useful Links</h2>
@@ -1724,7 +1744,7 @@
     vp2:              { role: '2nd Vice President',   name: 'Charli Cobb',    img: '', bio: '' },
     secretary:        { role: 'Secretary',            name: 'Hondo Young',    img: '', bio: '' },
     treasurer:        { role: 'Treasurer',            name: 'Gracie McLean',  img: '', bio: '' },
-    delegate1:        { role: 'Council Delegate',     name: 'Trace Hung',     img: '', bio: '' },
+    delegate1:        { role: 'Council Delegate',     name: 'Trace Hunt',     img: '', bio: '' },
     delegate2:        { role: 'Council Delegate',     name: 'Megan Swientek', img: '', bio: '' },
     jrdelegate:       { role: 'Jr. Council Delegate', name: 'Barrett Hunt',   img: '', bio: '' },
     parliamentarian:  { role: 'Parliamentarian',      name: 'Sloane Cobb',    img: '', bio: '' },
