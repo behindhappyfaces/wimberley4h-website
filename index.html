@@ -1583,7 +1583,10 @@
             <label>Password
               <input type="password" id="signup-password" minlength="6" required>
             </label>
-            <button type="submit" class="btn" style="background:var(--green); color:var(--white)">Create Account</button>
+            <div style="position:relative; display:inline-block">
+              <button type="submit" class="btn" disabled style="background:var(--green); color:var(--white); opacity:.5; cursor:not-allowed">Create Account</button>
+              <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.55); color:var(--white); font-weight:600; font-size:.85rem; border-radius:8px; cursor:not-allowed">🚧 Coming Soon</div>
+            </div>
             <p class="auth-error" id="signup-error"></p>
           </form>
         </div>
@@ -1596,7 +1599,10 @@
             <label>Password
               <input type="password" id="signin-password" required>
             </label>
-            <button type="submit" class="btn" style="background:var(--green); color:var(--white)">Log In</button>
+            <div style="position:relative; display:inline-block">
+              <button type="submit" class="btn" disabled style="background:var(--green); color:var(--white); opacity:.5; cursor:not-allowed">Log In</button>
+              <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.55); color:var(--white); font-weight:600; font-size:.85rem; border-radius:8px; cursor:not-allowed">🚧 Coming Soon</div>
+            </div>
             <p class="auth-error" id="signin-error"></p>
           </form>
         </div>
