@@ -938,6 +938,56 @@
       flex-shrink: 0;
     }
 
+    /* ── DEADLINE POPUP ── */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.65);
+      z-index: 300;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .popup-box {
+      position: relative;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: 0 20px 50px rgba(0,0,0,.35);
+      padding: 32px 28px;
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+    }
+    .popup-box h3 {
+      color: var(--barn);
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+    .popup-box p {
+      font-size: .95rem;
+      color: var(--text);
+      margin-bottom: 22px;
+      line-height: 1.5;
+    }
+    .popup-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .popup-close {
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      background: none;
+      border: none;
+      font-size: 1.3rem;
+      line-height: 1;
+      cursor: pointer;
+      color: var(--muted);
+    }
+    .popup-close:hover { color: var(--text); }
+
     .lightbox {
       display: none;
       position: fixed;
@@ -1057,6 +1107,19 @@
   </style>
 </head>
 <body>
+
+<!-- ═══ TAG ORDER DEADLINE POPUP ═══ -->
+<div class="popup-overlay" id="tag-deadline-popup" onclick="if(event.target===this) closeTagPopup()">
+  <div class="popup-box">
+    <button class="popup-close" onclick="closeTagPopup()" aria-label="Close">✕</button>
+    <h3>⏰ Tag Order Deadline</h3>
+    <p><strong>Friday, August 28</strong> is the deadline to order Goat, Heifer, and Sheep tags. Don't miss out — order online below.</p>
+    <div class="popup-links">
+      <a class="btn" style="background:var(--green); color:var(--white)" href="https://forms.cloud.microsoft/pages/responsepage.aspx?id=CljXn3JknE2hQtEx06ehFnJqSklGcFxLogl2l3FQvUZUM1dLMEg0UTRYTEQ3RVM3NUZRNElXN1pDVC4u&route=shorturl" target="_blank">🐐🐑 Sheep &amp; Goat Tag Order</a>
+      <a class="btn" style="background:var(--barn); color:var(--white)" href="https://forms.cloud.microsoft/pages/responsepage.aspx?id=CljXn3JknE2hQtEx06ehFnJqSklGcFxLogl2l3FQvUZURTZISktQVzBKMFBBVVA1S0FKUEM5WTNRVC4u&route=shorturl" target="_blank">🐄 Steer &amp; Heifer Tag Order</a>
+    </div>
+  </div>
+</div>
 
 <!-- ═══ HEADER ═══ -->
 <header>
@@ -1810,6 +1873,14 @@
   function toggleMenu() {
     document.getElementById('main-nav').classList.toggle('open');
   }
+
+  // ── Tag order deadline popup ──
+  function closeTagPopup() {
+    document.getElementById('tag-deadline-popup').style.display = 'none';
+  }
+  window.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('tag-deadline-popup').style.display = 'flex';
+  });
 
   // ── Officer bios — fill in `img` (photo URL) and `bio` for each officer as they're provided ──
   const officers = {
