@@ -988,6 +988,119 @@
     }
     .popup-close:hover { color: var(--text); }
 
+    /* ── ENROLLMENT REMINDER POPUP SEQUENCE ── */
+    .emoji-pop {
+      position: fixed;
+      inset: 0;
+      z-index: 400;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 10px;
+      background: rgba(0,0,0,.55);
+      cursor: pointer;
+    }
+    .emoji-pop .big-emoji {
+      font-size: 9rem;
+      line-height: 1;
+      animation: emojiPop .5s cubic-bezier(.34,1.56,.64,1);
+    }
+    .emoji-pop .emoji-caption {
+      color: var(--white);
+      font-weight: 800;
+      font-size: 1.4rem;
+      text-shadow: 0 2px 8px rgba(0,0,0,.4);
+    }
+    @keyframes emojiPop {
+      0%   { transform: scale(0); opacity: 0; }
+      60%  { transform: scale(1.15); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .reminder-flash {
+      position: fixed;
+      inset: 0;
+      z-index: 400;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,.6);
+      pointer-events: none;
+    }
+    .reminder-flash span {
+      color: var(--white);
+      font-size: 2rem;
+      font-weight: 900;
+      text-align: center;
+      padding: 0 20px;
+      animation: fadeInOut 3.2s ease-in-out;
+    }
+    @keyframes fadeInOut {
+      0%   { opacity: 0; transform: scale(.9); }
+      15%  { opacity: 1; transform: scale(1); }
+      80%  { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(.95); }
+    }
+
+    #rain-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 350;
+      display: none;
+      overflow: hidden;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(20,25,40,.35), rgba(20,25,40,.15));
+      animation: stormFade 9s ease-in-out forwards;
+    }
+    @keyframes stormFade {
+      0%   { opacity: 0; }
+      8%   { opacity: 1; }
+      85%  { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    #rain-overlay .lightning {
+      position: absolute;
+      inset: 0;
+      background: var(--white);
+      opacity: 0;
+      animation: lightningFlash 4.5s ease-out 1;
+    }
+    @keyframes lightningFlash {
+      0%, 18%, 22%, 100% { opacity: 0; }
+      19%, 21% { opacity: .55; }
+    }
+    .raindrop {
+      position: absolute;
+      top: -10%;
+      width: 2px;
+      height: 60px;
+      background: linear-gradient(180deg, transparent, rgba(180,210,255,.75));
+      animation-name: fall;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+    @keyframes fall {
+      0%   { transform: translateY(0); }
+      100% { transform: translateY(115vh); }
+    }
+    #rain-close {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 351;
+      display: none;
+      background: rgba(0,0,0,.4);
+      color: var(--white);
+      border: none;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      font-size: 1rem;
+      cursor: pointer;
+      pointer-events: auto;
+    }
+
     .lightbox {
       display: none;
       position: fixed;
@@ -1124,6 +1237,44 @@
   </div>
 </div>
 
+<!-- ═══ ENROLLMENT REMINDER POPUP SEQUENCE ═══ -->
+<div class="popup-overlay" id="enroll-check-popup">
+  <div class="popup-box">
+    <h3>🔑 Quick Question</h3>
+    <p>Have you created your family account and enrolled on the <strong>new</strong> Texas 4-H registration site yet?</p>
+    <div class="popup-links">
+      <button class="btn" style="background:var(--green); color:var(--white)" onclick="enrollAnswer('yes')">✅ Yes</button>
+      <button class="btn" style="background:var(--barn); color:var(--white)" onclick="enrollAnswer('no')">❌ No</button>
+      <button class="btn" style="background:transparent; color:var(--ink); border:2px solid var(--border)" onclick="enrollAnswer('dismiss')">Dismiss</button>
+    </div>
+  </div>
+</div>
+
+<div class="popup-overlay" id="enroll-go-popup">
+  <div class="popup-box">
+    <h3>😏 Shall We Go?</h3>
+    <p>No time like the present — want to head over and get your family enrolled right now?</p>
+    <div class="popup-links">
+      <a class="btn" style="background:var(--green); color:var(--white)" href="https://tx4h.tamu.edu/welcome" target="_blank" onclick="closeEnrollGoPopup()">Yes, let's go! ↗</a>
+      <button class="btn" style="background:transparent; color:var(--ink); border:2px solid var(--border)" onclick="closeEnrollGoPopup()">Not right now</button>
+    </div>
+  </div>
+</div>
+
+<div class="emoji-pop" id="enroll-yes-popup" onclick="closeEmojiPop()">
+  <div class="big-emoji">😉</div>
+  <div class="emoji-caption">Way to go — you're all set!</div>
+</div>
+
+<div class="reminder-flash" id="enroll-reminder-flash">
+  <span>⚠️ DON'T WAIT UNTIL<br>THE LAST MINUTE!</span>
+</div>
+
+<div id="rain-overlay">
+  <div class="lightning"></div>
+</div>
+<button id="rain-close" onclick="stopRain()" aria-label="Close">✕</button>
+
 <!-- ═══ SITE-WIDE ANNOUNCEMENT BANNER ═══ -->
 <div class="announce-banner">
   📰 Monthly 4-H Newsletters from the Extension Office are now posted on our Resources page — <a href="newsletter-september-2026.pdf" target="_blank">View September Newsletter →</a>
@@ -1189,15 +1340,12 @@
     </a>
   </section>
 
-  <section style="padding-top:16px; padding-bottom:0">
-    <div class="card" style="display:flex; flex-wrap:wrap; align-items:center; gap:18px; background:linear-gradient(135deg, var(--accent), var(--barn)); color:var(--white); box-shadow:0 8px 24px rgba(179,23,42,.3)">
-      <div style="font-size:2.2rem; line-height:1">🔑</div>
-      <div style="flex:1; min-width:240px">
-        <div style="font-size:.72rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; opacity:.9; margin-bottom:6px">📣 Heads Up — Registration Has Moved</div>
-        <h2 style="margin:0 0 6px; font-size:1.3rem; color:var(--white)">Texas 4-H Has a Brand-New Enrollment Site!</h2>
-        <p style="margin:0; opacity:.95">Create your family's <strong>new</strong> account and enroll for 2026–2027 ASAP — old 4-H Online / 4-H Connect logins won't carry over.</p>
-      </div>
-      <a class="btn btn-white" href="https://tx4h.tamu.edu/welcome" target="_blank" style="white-space:nowrap">Create Account / Enroll ↗</a>
+  <section style="padding-top:10px; padding-bottom:0">
+    <div class="card" style="padding:10px 18px; text-align:center; background:linear-gradient(135deg, var(--accent), var(--barn)); color:var(--white); box-shadow:0 4px 14px rgba(179,23,42,.25)">
+      <p style="margin:0; font-size:.85rem; font-weight:700; letter-spacing:.02em">
+        DO NOT FORGET! Texas 4-H has a brand-new enrollment site — create your family's new account and enroll for 2026–2027 at
+        <a href="https://tx4h.tamu.edu/welcome" target="_blank" style="color:var(--white); text-decoration:underline; font-weight:800">tx4h.tamu.edu/welcome</a>
+      </p>
     </div>
   </section>
 
@@ -1379,7 +1527,7 @@
         <span class="link-text"><span class="link-title">Hays County 4-H Facebook</span><span class="link-sub">County-wide updates</span></span>
         <span class="go">↗</span>
       </a>
-      <a class="link-card" href="https://v2.4honline.com/#/user/sign-in" target="_blank">
+      <a class="link-card" href="https://tx4h.tamu.edu/welcome" target="_blank">
         <span class="icon">📋</span>
         <span class="link-text"><span class="link-title">4-H Online Enrollment</span><span class="link-sub">Register &amp; manage membership</span></span>
         <span class="go">↗</span>
@@ -1841,7 +1989,7 @@
           <li><a href="https://texas4-h.tamu.edu/" target="_blank"><span class="badge web">WEB</span>Texas 4-H Homepage</a></li>
           <li><a href="https://hays.agrilife.org/4-h-youth/newsletters/" target="_blank"><span class="badge web">WEB</span>Hays County 4-H Newsletter</a></li>
           <li><a href="https://hays.agrilife.org" target="_blank"><span class="badge web">WEB</span>Hays County Extension Office</a></li>
-          <li><a href="https://v2.4honline.com/#/user/sign-in" target="_blank"><span class="badge web">WEB</span>4-H Online Enrollment</a></li>
+          <li><a href="https://tx4h.tamu.edu/welcome" target="_blank"><span class="badge web">WEB</span>4-H Online Enrollment</a></li>
           <li><a href="http://www.hayscountylivestockshow.org/" target="_blank"><span class="badge web">WEB</span>Hays County Livestock Show</a></li>
         </ul>
       </div>
@@ -1887,7 +2035,7 @@
       <a href="https://texas4-h.tamu.edu/" target="_blank">Texas 4-H</a>
       <a href="https://hays.agrilife.org" target="_blank">Hays County Extension Office</a>
       <a href="http://www.hayscountylivestockshow.org/" target="_blank">Hays County Livestock Show</a>
-      <a href="https://v2.4honline.com/#/user/sign-in" target="_blank">4-H Online Enrollment</a>
+      <a href="https://tx4h.tamu.edu/welcome" target="_blank">4-H Online Enrollment</a>
     </div>
     <div>
       <h4>Contact Us</h4>
@@ -1929,6 +2077,63 @@
   }
   window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('tag-deadline-popup').style.display = 'flex';
+  });
+
+  // ── Enrollment reminder popup sequence ──
+  function closeEnrollCheckPopup() {
+    document.getElementById('enroll-check-popup').style.display = 'none';
+  }
+  function closeEnrollGoPopup() {
+    document.getElementById('enroll-go-popup').style.display = 'none';
+  }
+  function closeEmojiPop() {
+    document.getElementById('enroll-yes-popup').style.display = 'none';
+  }
+  function enrollAnswer(choice) {
+    closeEnrollCheckPopup();
+    if (choice === 'yes') {
+      const pop = document.getElementById('enroll-yes-popup');
+      pop.style.display = 'flex';
+      setTimeout(closeEmojiPop, 2600);
+    } else if (choice === 'no') {
+      document.getElementById('enroll-go-popup').style.display = 'flex';
+    } else if (choice === 'dismiss') {
+      const flash = document.getElementById('enroll-reminder-flash');
+      flash.style.display = 'flex';
+      setTimeout(() => {
+        flash.style.display = 'none';
+        startRain();
+      }, 3200);
+    }
+  }
+
+  function startRain() {
+    const overlay = document.getElementById('rain-overlay');
+    const closeBtn = document.getElementById('rain-close');
+    overlay.innerHTML = '<div class="lightning"></div>';
+    const dropCount = 90;
+    for (let i = 0; i < dropCount; i++) {
+      const drop = document.createElement('div');
+      drop.className = 'raindrop';
+      drop.style.left = Math.random() * 100 + 'vw';
+      drop.style.animationDuration = (0.5 + Math.random() * 0.6) + 's';
+      drop.style.animationDelay = (Math.random() * 2) + 's';
+      drop.style.height = (40 + Math.random() * 40) + 'px';
+      overlay.appendChild(drop);
+    }
+    overlay.style.display = 'block';
+    closeBtn.style.display = 'block';
+    setTimeout(stopRain, 9000);
+  }
+  function stopRain() {
+    document.getElementById('rain-overlay').style.display = 'none';
+    document.getElementById('rain-close').style.display = 'none';
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      document.getElementById('enroll-check-popup').style.display = 'flex';
+    }, 5000);
   });
 
   // ── Officer bios — fill in `img` (photo URL) and `bio` for each officer as they're provided ──
