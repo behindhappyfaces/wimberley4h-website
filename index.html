@@ -342,6 +342,24 @@
       flex-shrink: 0;
     }
     .date-late { color: #c0392b; font-weight: 700; }
+    .dates-list li.past-date { display: none; opacity: .6; }
+    .dates-list.show-past li.past-date { display: flex; }
+    .dates-toggle {
+      display: block;
+      width: 100%;
+      margin: 4px 0 10px;
+      padding: 8px 12px;
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+      background: transparent;
+      font: inherit;
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--green-dark);
+      cursor: pointer;
+      text-align: left;
+    }
+    .dates-toggle:hover { border-color: var(--green); background: rgba(30,132,73,.06); }
 
     /* ── OFFICERS TREE ── */
     .officers-tree {
@@ -937,6 +955,81 @@
       color: var(--accent);
       flex-shrink: 0;
     }
+    .flyer-item { position: relative; }
+    .flyer-tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: .03em;
+      color: var(--white);
+      background: var(--accent);
+      box-shadow: 0 2px 6px rgba(0,0,0,.25);
+    }
+    .flyer-tag.ongoing { background: var(--green); }
+    .flyer-tag.past    { background: rgba(0,0,0,.6); }
+
+    /* Current flyers: swipeable strip so the home page never grows */
+    .flyer-board-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 36px;
+    }
+    .flyer-board-head .section-title { margin-top: 0; }
+    .flyer-arrows { display: flex; gap: 8px; }
+    .flyer-arrows button {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--white);
+      color: var(--green-dark);
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+    .flyer-arrows button:hover { background: var(--green); color: var(--white); }
+    .flyer-strip {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(220px, 240px);
+      gap: 18px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding: 4px 2px 14px;
+      scrollbar-width: thin;
+    }
+    .flyer-strip .flyer-item { scroll-snap-align: start; }
+    .flyer-archive-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 14px;
+      padding: 12px 18px;
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+      background: transparent;
+      width: 100%;
+      font: inherit;
+      font-weight: 700;
+      color: var(--green-dark);
+      cursor: pointer;
+    }
+    .flyer-archive-link:hover { border-color: var(--green); background: rgba(30,132,73,.06); }
+    .flyer-month {
+      margin: 28px 0 12px;
+      font-size: 1.05rem;
+      color: var(--green-dark);
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 6px;
+    }
 
     .lightbox {
       display: none;
@@ -1176,42 +1269,43 @@
             Full Year Timeline PDF ↗
           </a>
         </h3>
-        <ul class="dates-list">
-          <li><span class="date-label">May 25</span>   Star Award Applications Due</li>
-          <li><span class="date-label">May 22–25</span> Wimberley Memorial Day Rodeo</li>
-          <li><span class="date-label">June 1</span>   Deadline to order State Fair / HOT Swine Tags</li>
-          <li><span class="date-label">June 10</span>  Record Books Due</li>
-          <li><span class="date-label">June 13</span>  Steer / Heifer Validation, 8–11 AM, DSRP</li>
-          <li><span class="date-label">June 14</span>  County End-of-Year Party, Blue Hole, 6:30 PM</li>
-          <li><span class="date-label">June 23</span>  Deadline — Turkey Orders, Steer/Heifer Tags, Sheep/Goat Tags</li>
-          <li><span class="date-label">June 27</span>  Steer / Heifer Validation, 8–11 AM, DSRP</li>
-          <li><span class="date-label">July 12–18</span> Shooting Sports State Games, San Antonio</li>
-          <li><span class="date-label">Aug. 4</span>  <a class="date-late" href="https://docs.google.com/forms/d/1NOaI_yVDT9r-M94AyTkKBsqPJultRVQr-GXBg7lg5C0/viewform?edit_requested=true" target="_blank">RSVP DEADLINE</a> Hays County 4-H Awards Banquet</li>
-          <li><span class="date-label">Aug. 15</span>  Hays County 4-H Awards Banquet "Back to the Farm," 4–7 PM, Dripping Springs Ranch Park, dinner provided — <a href="back-to-the-farm-flyer.pdf" target="_blank">View Flyer ↗</a></li>
-          <li><span class="date-label">Aug. 28</span>  Deadline to order Goat, Heifer, Sheep Tags</li>
-          <li><span class="date-label">Sept. 1</span>  Swine Tag Orders Open</li>
-          <li><span class="date-label">Sept. 9</span>  Hays Co. 4-H Open House, 6–8 PM, Buda VoAg</li>
-          <li><span class="date-label">Sept. 14</span> <strong>First Monthly Meeting, Wimberley VFW, 7 PM</strong></li>
-          <li><span class="date-label">Sept. 16</span> <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=CljXn3JknE2hQtEx06ehFig_rAnWjShAshdDxhng4l9URFJLT0pNVE5QT1c1TklPNUZLVDFZTlNJTS4u" target="_blank">Broiler Orders</a> due to Extension Office (late fees apply after this date)</li>
-          <li><span class="date-label">Sept. 25</span> <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=CljXn3JknE2hQtEx06ehFofPB2J5eBtCnZmuhVmSMpVURjJNUk9UMlNJQk9YQzhGWDFHUVVXQ1lRTy4u" target="_blank">Swine Tag Orders</a> Close</li>
-          <li><span class="date-label">Oct. 1</span>   <span class="date-late">LATE</span> Swine Tag Orders Open</li>
-          <li><span class="date-label">Oct. 12</span>  <strong>Monthly Club Meeting, 7 PM at VFW</strong></li>
-          <li><span class="date-label">Oct. 13</span>  County Round Up Deadline</li>
-          <li><span class="date-label">Oct. 17</span>  Heifer / Goat / Sheep Validation, 8–11 AM, DSRP</li>
-          <li><span class="date-label">Oct. 20 &amp; 22</span> Fall County Round Up — <a href="https://d104-h.tamu.edu/district-10-4-h-fall-round-up/" target="_blank">2025 Category Rules</a></li>
-          <li><span class="date-label">Oct. 24</span>  Sheep / Goat Validation, 8–11 AM, DSRP</li>
-          <li><span class="date-label">Nov. 1</span>   Horse Validation Deadline</li>
-          <li><span class="date-label">Nov. 5</span>   <strong>VFW Thanksgiving Dinner</strong> — we feed the VFW dinner! Sign up to bring a side or dessert (SignUpGenius posted to GroupMe). More details to come.</li>
-          <li><span class="date-label">Nov. 7</span>   <span class="date-late">LATE</span> Swine Tag Orders Close · Swine Validation, 8–11 AM, DSRP</li>
-          <li><span class="date-label">Nov. 9</span>   <strong>Monthly Club Meeting, 7 PM at VFW — Dress in camo!</strong></li>
-          <li><span class="date-label">Nov. 11</span>  <span class="date-late">DEADLINE</span> Major Entry Deadline — all major show entries due!</li>
-          <li><span class="date-label">Nov. 12</span>  Turkey Pick Up</li>
-          <li><span class="date-label">Dec. 1</span>   <span class="date-late">RSVP DEADLINE</span> December Meeting / Christmas Dinner (Google doc posted to GroupMe)</li>
-          <li><span class="date-label">Dec. 11</span>  Broiler Pick Up, time TBA</li>
-          <li><span class="date-label">Dec. 14</span>  <strong>Club Meeting — Ugly Sweater Party!</strong></li>
-          <li><span class="date-label">Dec. 16</span>  <span class="date-late">DEADLINE</span> HCLS Entry Deadline — <strong class="date-late" style="text-transform:uppercase">⚠️ Late fees are $300 per project!</strong></li>
-          <li><span class="date-label">Dec. 18</span>  Deadline to Order Show Pen Signs (Google doc posted to GroupMe)</li>
-          <li><span class="date-label">Dec. 19</span>  Rabbit Validation, 8–11 AM, Buda VoAg</li>
+        <button class="dates-toggle" id="dates-toggle" onclick="togglePastDates()"></button>
+        <ul class="dates-list" id="dates-list">
+          <li data-month="2026-05"><span class="date-label">May 25</span>   Star Award Applications Due</li>
+          <li data-month="2026-05"><span class="date-label">May 22–25</span> Wimberley Memorial Day Rodeo</li>
+          <li data-month="2026-06"><span class="date-label">June 1</span>   Deadline to order State Fair / HOT Swine Tags</li>
+          <li data-month="2026-06"><span class="date-label">June 10</span>  Record Books Due</li>
+          <li data-month="2026-06"><span class="date-label">June 13</span>  Steer / Heifer Validation, 8–11 AM, DSRP</li>
+          <li data-month="2026-06"><span class="date-label">June 14</span>  County End-of-Year Party, Blue Hole, 6:30 PM</li>
+          <li data-month="2026-06"><span class="date-label">June 23</span>  Deadline — Turkey Orders, Steer/Heifer Tags, Sheep/Goat Tags</li>
+          <li data-month="2026-06"><span class="date-label">June 27</span>  Steer / Heifer Validation, 8–11 AM, DSRP</li>
+          <li data-month="2026-07"><span class="date-label">July 12–18</span> Shooting Sports State Games, San Antonio</li>
+          <li data-month="2026-08"><span class="date-label">Aug. 4</span>  <a class="date-late" href="https://docs.google.com/forms/d/1NOaI_yVDT9r-M94AyTkKBsqPJultRVQr-GXBg7lg5C0/viewform?edit_requested=true" target="_blank">RSVP DEADLINE</a> Hays County 4-H Awards Banquet</li>
+          <li data-month="2026-08"><span class="date-label">Aug. 15</span>  Hays County 4-H Awards Banquet "Back to the Farm," 4–7 PM, Dripping Springs Ranch Park, dinner provided — <a href="back-to-the-farm-flyer.pdf" target="_blank">View Flyer ↗</a></li>
+          <li data-month="2026-08"><span class="date-label">Aug. 28</span>  Deadline to order Goat, Heifer, Sheep Tags</li>
+          <li data-month="2026-09"><span class="date-label">Sept. 1</span>  Swine Tag Orders Open</li>
+          <li data-month="2026-09"><span class="date-label">Sept. 9</span>  Hays Co. 4-H Open House, 6–8 PM, Buda VoAg</li>
+          <li data-month="2026-09"><span class="date-label">Sept. 14</span> <strong>First Monthly Meeting, Wimberley VFW, 7 PM</strong></li>
+          <li data-month="2026-09"><span class="date-label">Sept. 16</span> <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=CljXn3JknE2hQtEx06ehFig_rAnWjShAshdDxhng4l9URFJLT0pNVE5QT1c1TklPNUZLVDFZTlNJTS4u" target="_blank">Broiler Orders</a> due to Extension Office (late fees apply after this date)</li>
+          <li data-month="2026-09"><span class="date-label">Sept. 25</span> <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=CljXn3JknE2hQtEx06ehFofPB2J5eBtCnZmuhVmSMpVURjJNUk9UMlNJQk9YQzhGWDFHUVVXQ1lRTy4u" target="_blank">Swine Tag Orders</a> Close</li>
+          <li data-month="2026-10"><span class="date-label">Oct. 1</span>   <span class="date-late">LATE</span> Swine Tag Orders Open</li>
+          <li data-month="2026-10"><span class="date-label">Oct. 12</span>  <strong>Monthly Club Meeting, 7 PM at VFW</strong></li>
+          <li data-month="2026-10"><span class="date-label">Oct. 13</span>  County Round Up Deadline</li>
+          <li data-month="2026-10"><span class="date-label">Oct. 17</span>  Heifer / Goat / Sheep Validation, 8–11 AM, DSRP</li>
+          <li data-month="2026-10"><span class="date-label">Oct. 20 &amp; 22</span> Fall County Round Up — <a href="https://d104-h.tamu.edu/district-10-4-h-fall-round-up/" target="_blank">2025 Category Rules</a></li>
+          <li data-month="2026-10"><span class="date-label">Oct. 24</span>  Sheep / Goat Validation, 8–11 AM, DSRP</li>
+          <li data-month="2026-11"><span class="date-label">Nov. 1</span>   Horse Validation Deadline</li>
+          <li data-month="2026-11"><span class="date-label">Nov. 5</span>   <span><strong>VFW Thanksgiving Dinner</strong> — we feed the VFW dinner! Sign up to bring a side or dessert (SignUpGenius posted to GroupMe). More details to come.</span></li>
+          <li data-month="2026-11"><span class="date-label">Nov. 7</span>   <span class="date-late">LATE</span> Swine Tag Orders Close · Swine Validation, 8–11 AM, DSRP</li>
+          <li data-month="2026-11"><span class="date-label">Nov. 9</span>   <strong>Monthly Club Meeting, 7 PM at VFW — Dress in camo!</strong></li>
+          <li data-month="2026-11"><span class="date-label">Nov. 11</span>  <span class="date-late">DEADLINE</span> Major Entry Deadline — all major show entries due!</li>
+          <li data-month="2026-11"><span class="date-label">Nov. 12</span>  Turkey Pick Up</li>
+          <li data-month="2026-12"><span class="date-label">Dec. 1</span>   <span class="date-late">RSVP DEADLINE</span> December Meeting / Christmas Dinner (Google doc posted to GroupMe)</li>
+          <li data-month="2026-12"><span class="date-label">Dec. 11</span>  Broiler Pick Up, time TBA</li>
+          <li data-month="2026-12"><span class="date-label">Dec. 14</span>  <strong>Club Meeting — Ugly Sweater Party!</strong></li>
+          <li data-month="2026-12"><span class="date-label">Dec. 16</span>  <span class="date-late">DEADLINE</span> HCLS Entry Deadline — <strong class="date-late" style="text-transform:uppercase">⚠️ Late fees are $300 per project!</strong></li>
+          <li data-month="2026-12"><span class="date-label">Dec. 18</span>  Deadline to Order Show Pen Signs (Google doc posted to GroupMe)</li>
+          <li data-month="2026-12"><span class="date-label">Dec. 19</span>  Rabbit Validation, 8–11 AM, Buda VoAg</li>
         </ul>
         <p style="margin-top:12px; font-size:.85rem; color:var(--muted)">
           <a href="https://hays.agrilife.org/4-h-youth/newsletters/" target="_blank">Hays County 4-H Newsletter</a> ·
@@ -1243,50 +1337,16 @@
       </div>
     </div>
 
-    <!-- Flyer Board -->
-    <h2 class="section-title tag-cardinal" style="margin-top:36px">📌 Flyer Board</h2>
-    <div class="flyer-grid">
-      <a class="flyer-item" href="flyer-county-council-halloween-oct-26-2026.jpg" target="_blank">
-        <img src="flyer-county-council-halloween-oct-26-2026.jpg" alt="Hays County Council Halloween-themed meeting — October 26, 2026, 6:30 PM, Hays County Extension Office flyer">
-        <div class="flyer-caption"><span>County Council Halloween Meeting — Oct. 26</span><span class="flyer-view">View ↗</span></div>
-      </a>
-      <a class="flyer-item" href="flyer-junior-master-photographer-workshops-2026.jpg" target="_blank">
-        <img src="flyer-junior-master-photographer-workshops-2026.jpg" alt="Junior Master Photographer Workshops 2026 flyer">
-        <div class="flyer-caption"><span>Junior Master Photographer Workshops 2026</span><span class="flyer-view">View ↗</span></div>
-      </a>
-      <a class="flyer-item" href="flyer-majors-stockshow-entry-deadline-2026.jpg" target="_blank">
-        <img src="flyer-majors-stockshow-entry-deadline-2026.jpg" alt="Wimberley 4-H Majors Stockshow Entry Deadline flyer">
-        <div class="flyer-caption"><span>Majors Stockshow Entry Deadline</span><span class="flyer-view">View ↗</span></div>
-      </a>
-      <a class="flyer-item" href="flyer-show-season-announcement.jpg" target="_blank">
-        <img src="flyer-show-season-announcement.jpg" alt="Important announcement — parents, please read posts to stay informed for show season and holidays flyer">
-        <div class="flyer-caption"><span>Show Season / Holidays — Parents Please Read</span><span class="flyer-view">View ↗</span></div>
-      </a>
-      <a class="flyer-item" href="flyer-show-tip-tuesday-hcls-rulebook.jpg" target="_blank">
-        <img src="flyer-show-tip-tuesday-hcls-rulebook.jpg" alt="Show Tip Tuesday — read the HCLS Rulebook flyer">
-        <div class="flyer-caption"><span>Show Tip Tuesday — Read the HCLS Rulebook</span><span class="flyer-view">View ↗</span></div>
-      </a>
-      <a class="flyer-item" href="flyer-bingo-concessions-vfw.jpg" target="_blank">
-        <img src="flyer-bingo-concessions-vfw.jpg" alt="Wimberley 4-H Bingo Concessions at the VFW every 3rd Friday flyer">
-        <div class="flyer-caption"><span>Bingo Concessions at the VFW — Every 3rd Friday</span><span class="flyer-view">View ↗</span></div>
-      </a>
-      <a class="flyer-item" href="flyer-tshirt-hoodie-late-order-oct-23-2026.jpg" target="_blank">
-        <img src="flyer-tshirt-hoodie-late-order-oct-23-2026.jpg" alt="Missed the t-shirt and hoodie order? Deadline Friday Oct 23 by 5 PM flyer">
-        <div class="flyer-caption"><span>T-Shirt &amp; Hoodie Late Orders — Oct. 23</span><span class="flyer-view">View ↗</span></div>
-      </a>
-      <a class="flyer-item" href="flyer-county-round-up-2026.jpg" target="_blank">
-        <img src="flyer-county-round-up-2026.jpg" alt="County Round Up October 2026 flyer">
-        <div class="flyer-caption"><span>County Round Up — October 2026</span><span class="flyer-view">View ↗</span></div>
-      </a>
-      <a class="flyer-item" href="flyer-october-reminders-2026.jpg" target="_blank">
-        <img src="flyer-october-reminders-2026.jpg" alt="Wimberley 4-H October Reminders flyer — October 12 meeting, community service, important October dates">
-        <div class="flyer-caption"><span>October Reminders — Oct. 12 Meeting</span><span class="flyer-view">View ↗</span></div>
-      </a>
-      <a class="flyer-item" href="flyer-swine-tag-orders-county-majors-2027.jpg" target="_blank">
-        <img src="flyer-swine-tag-orders-county-majors-2027.jpg" alt="2027 Swine Tag Orders for County and Majors flyer">
-        <div class="flyer-caption"><span>2027 Swine Tag Orders — County &amp; Majors</span><span class="flyer-view">View ↗</span></div>
-      </a>
+    <!-- Flyer Board — rendered from the `flyers` list in the site script -->
+    <div class="flyer-board-head">
+      <h2 class="section-title tag-cardinal">📌 Flyer Board</h2>
+      <div class="flyer-arrows">
+        <button onclick="scrollFlyers(-1)" aria-label="Previous flyers">‹</button>
+        <button onclick="scrollFlyers(1)" aria-label="More flyers">›</button>
+      </div>
     </div>
+    <div class="flyer-strip" id="flyer-strip"></div>
+    <button class="flyer-archive-link" id="flyer-archive-link" onclick="showFlyerArchive()">🗂️ View all past flyers →</button>
 
     <!-- Officers -->
     <h2 class="section-title" style="margin-top:36px">2026–2027 Officers</h2>
@@ -1834,6 +1894,15 @@
 <!-- ═══════════════════════════════════════════
      PAGE: OFFICER BIO (not in main nav — opened from Officers tree)
 ═══════════════════════════════════════════ -->
+<div id="page-flyers" class="page">
+  <section>
+    <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+    <h2 class="section-title tag-cardinal">🗂️ Flyer Archive</h2>
+    <p style="color:var(--muted)">Past flyers, newest first. Current flyers are on the Home page.</p>
+    <div id="flyer-archive"></div>
+  </section>
+</div>
+
 <div id="page-officer-bio" class="page">
   <section>
     <button class="back-btn" onclick="showPage('home')">← Back to Officers</button>
@@ -1887,6 +1956,7 @@
 
   function showPage(id) {
     document.getElementById('page-officer-bio').classList.remove('active');
+    document.getElementById('page-flyers').classList.remove('active');
     pages.forEach(p => {
       document.getElementById('page-' + p).classList.toggle('active', p === id);
     });
@@ -1902,6 +1972,99 @@
   function toggleMenu() {
     document.getElementById('main-nav').classList.toggle('open');
   }
+
+  // ── Upcoming Dates — months before the current one start collapsed ──
+  // Tag each new <li> with data-month="YYYY-MM" so it rolls into "previous dates" automatically.
+  function setupPastDates() {
+    const now = new Date();
+    const thisMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+    const items = document.querySelectorAll('#dates-list li[data-month]');
+    let count = 0;
+    items.forEach(li => { if (li.dataset.month < thisMonth) { li.classList.add('past-date'); count++; } });
+    const btn = document.getElementById('dates-toggle');
+    btn.dataset.count = count;
+    btn.style.display = count ? '' : 'none';
+    updateDatesToggle();
+  }
+  function updateDatesToggle() {
+    const btn = document.getElementById('dates-toggle');
+    const open = document.getElementById('dates-list').classList.contains('show-past');
+    btn.textContent = open ? '▾ Hide previous deadlines & dates' : `▸ Click here to view all ${btn.dataset.count} previous deadlines & dates`;
+  }
+  function togglePastDates() {
+    document.getElementById('dates-list').classList.toggle('show-past');
+    updateDatesToggle();
+  }
+  setupPastDates();
+
+  // ── Flyer Board ──
+  // Add new flyers here. `date` = the event/deadline date (sort order + label).
+  // `until` (optional) = keep showing on Home through this date; defaults to `date`.
+  // Leave `date` out for ongoing flyers. Once `until` passes, a flyer moves to the archive automatically.
+  // `pinned: true` keeps a flyer first on the board; `tag` overrides the date badge text.
+  const flyers = [
+    { file: 'flyer-looking-ahead-nov-dec-2026.jpg', title: 'Looking Ahead: November &amp; December', date: '2026-11-01', until: '2026-12-19', pinned: true, tag: '📅 Nov &amp; Dec', alt: 'Wimberley 4-H Looking Ahead: November and December 2026 dates flyer' },
+    { file: 'flyer-county-council-halloween-oct-26-2026.jpg', title: 'County Council Halloween Meeting', date: '2026-10-26', alt: 'Hays County Council Halloween-themed meeting — October 26, 2026, 6:30 PM, Hays County Extension Office flyer' },
+    { file: 'flyer-junior-master-photographer-workshops-2026.jpg', title: 'Junior Master Photographer Workshops 2026', date: '2026-10-30', until: '2026-12-05', alt: 'Junior Master Photographer Workshops 2026 flyer' },
+    { file: 'flyer-majors-stockshow-entry-deadline-2026.jpg', title: 'Majors Stockshow Entry Deadline', date: '2026-11-10', alt: 'Wimberley 4-H Majors Stockshow Entry Deadline flyer' },
+    { file: 'flyer-show-season-announcement.jpg', title: 'Show Season / Holidays — Parents Please Read', alt: 'Important announcement — parents, please read posts to stay informed for show season and holidays flyer' },
+    { file: 'flyer-show-tip-tuesday-hcls-rulebook.jpg', title: 'Show Tip Tuesday — Read the HCLS Rulebook', alt: 'Show Tip Tuesday — read the HCLS Rulebook flyer' },
+    { file: 'flyer-bingo-concessions-vfw.jpg', title: 'Bingo Concessions at the VFW — Every 3rd Friday', alt: 'Wimberley 4-H Bingo Concessions at the VFW every 3rd Friday flyer' },
+    { file: 'flyer-tshirt-hoodie-late-order-oct-23-2026.jpg', title: 'T-Shirt &amp; Hoodie Late Orders', date: '2026-10-23', alt: 'Missed the t-shirt and hoodie order? Deadline Friday Oct 23 by 5 PM flyer' },
+    { file: 'flyer-county-round-up-2026.jpg', title: 'County Round Up — October 2026', date: '2026-10-22', alt: 'County Round Up October 2026 flyer' },
+    { file: 'flyer-october-reminders-2026.jpg', title: 'October Reminders — Oct. 12 Meeting', date: '2026-10-12', alt: 'Wimberley 4-H October Reminders flyer — October 12 meeting, community service, important October dates' },
+    { file: 'flyer-swine-tag-orders-county-majors-2027.jpg', title: '2027 Swine Tag Orders — County &amp; Majors', date: '2026-09-25', alt: '2027 Swine Tag Orders for County and Majors flyer' },
+  ];
+
+  const flyerDate = d => new Date(d + 'T23:59:59');
+  const flyerLabel = d => flyerDate(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+  function flyerCard(f, tag, tagClass) {
+    return `<a class="flyer-item" href="${f.file}" target="_blank">
+        <span class="flyer-tag ${tagClass}">${tag}</span>
+        <img src="${f.file}" alt="${f.alt}" loading="lazy">
+        <div class="flyer-caption"><span>${f.title}</span><span class="flyer-view">View ↗</span></div>
+      </a>`;
+  }
+
+  function renderFlyers() {
+    const now = new Date();
+    const isPast = f => f.date && flyerDate(f.until || f.date) < now;
+    const current = flyers.filter(f => !isPast(f)).sort((a, b) =>
+      (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0) || (a.date ? 0 : 1) - (b.date ? 0 : 1) || (a.date || '').localeCompare(b.date || ''));
+    const past = flyers.filter(isPast).sort((a, b) => b.date.localeCompare(a.date));
+
+    document.getElementById('flyer-strip').innerHTML = current.map(f =>
+      f.date ? flyerCard(f, f.tag || '📅 ' + flyerLabel(f.date), '') : flyerCard(f, '🔁 Ongoing', 'ongoing')).join('');
+
+    const link = document.getElementById('flyer-archive-link');
+    link.textContent = `🗂️ View all past flyers (${past.length}) →`;
+    link.style.display = past.length ? '' : 'none';
+
+    // Archive grouped by month
+    const groups = {};
+    past.forEach(f => {
+      const m = flyerDate(f.date).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+      (groups[m] = groups[m] || []).push(f);
+    });
+    document.getElementById('flyer-archive').innerHTML = Object.entries(groups).map(([m, list]) =>
+      `<h3 class="flyer-month">${m}</h3><div class="flyer-grid">${list.map(f => flyerCard(f, flyerLabel(f.date), 'past')).join('')}</div>`
+    ).join('');
+  }
+
+  function scrollFlyers(dir) {
+    const strip = document.getElementById('flyer-strip');
+    strip.scrollBy({ left: dir * strip.clientWidth * 0.8, behavior: 'smooth' });
+  }
+
+  function showFlyerArchive() {
+    showPage('home');
+    document.getElementById('page-home').classList.remove('active');
+    navBtns.forEach(btn => btn.classList.remove('active'));
+    document.getElementById('page-flyers').classList.add('active');
+  }
+
+  renderFlyers();
 
   // ── Officer bios — fill in `img` (photo URL) and `bio` for each officer as they're provided ──
   const officers = {
