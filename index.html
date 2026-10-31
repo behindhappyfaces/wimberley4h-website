@@ -343,6 +343,57 @@
     }
     .date-late { color: #c0392b; font-weight: 700; }
 
+    /* ── DEADLINE POPUP ── */
+    .deadline-pop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: rgba(0,0,0,.6);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .deadline-pop.open { display: flex; }
+    .deadline-pop-box {
+      position: relative;
+      max-width: 420px;
+      width: 100%;
+      background: var(--white);
+      border-radius: var(--radius);
+      border-top: 8px solid var(--accent);
+      box-shadow: 0 20px 50px rgba(0,0,0,.35);
+      padding: 30px 26px 24px;
+      text-align: center;
+      animation: popIn .35s cubic-bezier(.34,1.56,.64,1);
+    }
+    @keyframes popIn { from { transform: scale(.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .deadline-pop-box .pop-emoji { font-size: 3.5rem; line-height: 1; margin-bottom: 8px; }
+    .deadline-pop-box .pop-when {
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: 999px;
+      background: #c0392b;
+      color: var(--white);
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .deadline-pop-box h3 { margin: 0 0 6px; font-size: 1.4rem; color: var(--green-dark); }
+    .deadline-pop-box p { margin: 0 0 20px; color: var(--text); }
+    .deadline-pop-close {
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      background: none;
+      border: none;
+      font-size: 1.3rem;
+      cursor: pointer;
+      color: var(--muted);
+    }
+
     /* ── BAKE SALE RECIPE CARD ── */
     .bake-card {
       position: relative;
@@ -1224,6 +1275,18 @@
 </head>
 <body>
 
+<!-- ═══ DEADLINE POPUP — shows until DEADLINE_POPUP.date passes (see site script) ═══ -->
+<div class="deadline-pop" id="deadline-pop" onclick="if (event.target === this) closeDeadlinePop()">
+  <div class="deadline-pop-box" role="dialog" aria-modal="true" aria-labelledby="deadline-pop-title">
+    <button class="deadline-pop-close" onclick="closeDeadlinePop()" aria-label="Close">✕</button>
+    <div class="pop-emoji">🐴</div>
+    <div class="pop-when" id="deadline-pop-when"></div>
+    <h3 id="deadline-pop-title">Horse Validation Deadline</h3>
+    <p><strong>Sunday, November 1</strong><br>Don't miss it. Get your horse validation in on time!</p>
+    <button class="btn" style="background:var(--green); color:var(--white)" onclick="closeDeadlinePop()">Got it!</button>
+  </div>
+</div>
+
 <!-- ═══ SITE-WIDE ANNOUNCEMENT BANNER ═══ -->
 <div class="announce-banner">
   📰 Monthly 4-H Newsletters from the Extension Office are now posted on our Resources page — <a href="newsletter-october-2026.pdf" target="_blank">View October Newsletter →</a>
@@ -2088,6 +2151,24 @@
     updateDatesToggle();
   }
   setupPastDates();
+
+  // ── Deadline popup — once per visit, stops appearing after the deadline day ──
+  const DEADLINE_POPUP = { id: 'horse-validation-2026', date: '2026-11-01' };
+  function closeDeadlinePop() {
+    document.getElementById('deadline-pop').classList.remove('open');
+    try { sessionStorage.setItem('seen-' + DEADLINE_POPUP.id, '1'); } catch (e) {}
+  }
+  (function showDeadlinePop() {
+    const due = new Date(DEADLINE_POPUP.date + 'T00:00:00');
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const days = Math.round((due - today) / 86400000);
+    if (days < 0) return;
+    try { if (sessionStorage.getItem('seen-' + DEADLINE_POPUP.id)) return; } catch (e) {}
+    document.getElementById('deadline-pop-when').textContent =
+      days === 0 ? '⏰ Due Today!' : days === 1 ? '⏰ Due Tomorrow!' : `⏰ ${days} days left`;
+    document.getElementById('deadline-pop').classList.add('open');
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDeadlinePop(); });
+  })();
 
   // ── Bake Sale countdown — card hides itself the day after the sale ──
   const BAKE_SALE_DATE = '2026-11-08';
