@@ -1,15 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-50 -50 100 100">
   <defs>
-    <g id="leaf">
-      <path d="M0 -1.5 C-5 -6 -15 -9 -15 -19 A7.5 7.5 0 0 1 0 -21.5 A7.5 7.5 0 0 1 15 -19 C15 -9 5 -6 0 -1.5 Z" fill="#1e8449"/>
-      <text x="0" y="-9" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="12" text-anchor="middle" fill="#fff">H</text>
-    </g>
+    <!-- one heart-shaped leaf, tip at the center, lobes pointing outward (up) -->
+    <path id="leaf" d="M0 0 C-12 -8 -31 -16 -31 -32 C-31 -42 -23 -48 -15 -48 C-8 -48 -2 -44 0 -38 C2 -44 8 -48 15 -48 C23 -48 31 -42 31 -32 C31 -16 12 -8 0 0 Z"/>
+    <text id="h" x="0" y="-14" font-family="'Arial Black', Arial, Helvetica, sans-serif" font-weight="900" font-size="25" text-anchor="middle" fill="#fff">H</text>
+    <clipPath id="tl"><rect x="-60" y="-60" width="57.5" height="57.5"/></clipPath>
+    <clipPath id="tr"><rect x="2.5" y="-60" width="57.5" height="57.5"/></clipPath>
+    <clipPath id="bl"><rect x="-60" y="2.5" width="57.5" height="57.5"/></clipPath>
+    <clipPath id="br"><rect x="2.5" y="2.5" width="57.5" height="57.5"/></clipPath>
   </defs>
-  <path d="M33 33 Q44 46 46 60" stroke="#1e8449" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-  <g transform="translate(32 31)">
-    <use href="#leaf" transform="rotate(-45)"/>
-    <use href="#leaf" transform="rotate(45)"/>
-    <use href="#leaf" transform="rotate(135)"/>
-    <use href="#leaf" transform="rotate(-135)"/>
+  <g transform="translate(-1 -5) scale(.9)">
+    <g fill="#339966">
+      <g clip-path="url(#tl)"><use href="#leaf" transform="rotate(-45)"/></g>
+      <g clip-path="url(#tr)"><use href="#leaf" transform="rotate(45)"/></g>
+      <g clip-path="url(#bl)"><use href="#leaf" transform="rotate(-135)"/></g>
+      <g clip-path="url(#br)"><use href="#leaf" transform="rotate(135)"/></g>
+      <!-- stem: from the center down through the bottom gap, curving slightly right -->
+      <path d="M-1.5 2 C-1 24 1 40 8 58 L14.5 55.5 C8 38 4.5 23 2.5 2 Z" stroke="#fff" stroke-width="2" paint-order="stroke"/>
+    </g>
+    <use href="#h" transform="rotate(-45)"/>
+    <use href="#h" transform="rotate(45)"/>
+    <use href="#h" transform="rotate(-135)"/>
+    <use href="#h" transform="rotate(135)"/>
   </g>
 </svg>
