@@ -342,6 +342,79 @@
       flex-shrink: 0;
     }
     .date-late { color: #c0392b; font-weight: 700; }
+
+    /* ── BAKE SALE RECIPE CARD ── */
+    .bake-card {
+      position: relative;
+      overflow: hidden;
+      background: #fffaf0;
+      border: 1px solid #ecd9b8;
+      border-radius: var(--radius);
+      box-shadow: 0 8px 24px rgba(120,72,20,.18);
+      padding: 34px 30px 26px;
+      color: #4a2f17;
+    }
+    .bake-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 14px;
+      background:
+        repeating-linear-gradient(90deg, rgba(179,23,42,.85) 0 14px, transparent 14px 28px),
+        repeating-linear-gradient(0deg, rgba(179,23,42,.45) 0 7px, #fff 7px 14px);
+    }
+    .bake-card .bake-kicker {
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .bake-card h2 { margin: 0 0 6px; font-size: 1.7rem; color: #6b3a12; }
+    .bake-card .bake-date { font-size: 1.05rem; margin: 0 0 16px; }
+    .bake-card .bake-countdown {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 2px 10px;
+      border-radius: 999px;
+      background: #6b3a12;
+      color: #fffaf0;
+      font-size: .78rem;
+      font-weight: 800;
+      vertical-align: middle;
+    }
+    .bake-lines {
+      background-image: repeating-linear-gradient(180deg, transparent 0 31px, #e6d3b3 31px 32px);
+      line-height: 32px;
+      padding-left: 14px;
+      border-left: 2px solid rgba(179,23,42,.35);
+      margin-bottom: 18px;
+    }
+    .bake-lines p { margin: 0; font-size: .95rem; }
+    .bake-treats { font-size: 1.6rem; letter-spacing: 6px; margin-bottom: 14px; }
+    .bake-stamp {
+      position: absolute;
+      top: 34px;
+      right: 26px;
+      transform: rotate(8deg);
+      border: 3px double var(--accent);
+      color: var(--accent);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-weight: 900;
+      font-size: .8rem;
+      letter-spacing: .08em;
+      text-align: center;
+      text-transform: uppercase;
+      line-height: 1.25;
+      opacity: .85;
+      background: rgba(255,250,240,.8);
+    }
+    @media (max-width: 640px) {
+      .bake-card { padding: 30px 20px 22px; }
+      .bake-stamp { position: static; display: inline-block; margin-bottom: 12px; transform: rotate(-3deg); }
+    }
     .dates-list li.past-date { display: none; opacity: .6; }
     .dates-list.show-past li.past-date { display: flex; }
     .dates-toggle {
@@ -1212,6 +1285,23 @@
     </div>
   </section>
 
+  <!-- Bake Sale — hides itself after the sale date (see BAKE_SALE_DATE in the site script) -->
+  <section style="padding-top:18px; padding-bottom:0" id="bake-sale-section">
+    <div class="bake-card">
+      <div class="bake-stamp">Drop-off details<br>coming soon!</div>
+      <div class="bake-kicker">🧁 Calling All Bakers!</div>
+      <h2>Wimberley 4-H Bake Sale</h2>
+      <p class="bake-date"><strong>Sunday, November 8</strong><span class="bake-countdown" id="bake-countdown"></span></p>
+      <div class="bake-treats" aria-hidden="true">🍪🥧🧁🍞🍰🍩</div>
+      <div class="bake-lines">
+        <p><strong>We need your baked goods!</strong> Cookies, pies, cupcakes, breads, and family favorites.</p>
+        <p>📍 Drop-off time &amp; location: <em>to be announced</em></p>
+        <p>👩‍🍳 Start picking your recipe now and preheat those ovens!</p>
+      </div>
+      <a class="btn" style="background:var(--accent); color:var(--white)" href="https://groupme.com/join_group/104915684/PDyMywbP" target="_blank">Get drop-off details first on GroupMe ↗</a>
+    </div>
+  </section>
+
   <section style="padding-top:10px; padding-bottom:0">
     <div class="card" style="padding:10px 18px; text-align:center; background:linear-gradient(135deg, var(--accent), var(--barn)); color:var(--white); box-shadow:0 4px 14px rgba(179,23,42,.25)">
       <p style="margin:0; font-size:.85rem; font-weight:700; letter-spacing:.02em">
@@ -1297,6 +1387,7 @@
           <li data-month="2026-11"><span class="date-label">Nov. 1</span>   Horse Validation Deadline</li>
           <li data-month="2026-11"><span class="date-label">Nov. 5</span>   <span><strong>VFW Thanksgiving Dinner</strong> — we feed the VFW dinner! Sign up to bring a side or dessert (SignUpGenius posted to GroupMe). More details to come.</span></li>
           <li data-month="2026-11"><span class="date-label">Nov. 7</span>   <span class="date-late">LATE</span> Swine Tag Orders Close · Swine Validation, 8–11 AM, DSRP</li>
+          <li data-month="2026-11"><span class="date-label">Nov. 8</span>   <span><strong>🧁 Bake Sale</strong> — we need baked goods! Drop-off details coming soon (watch GroupMe).</span></li>
           <li data-month="2026-11"><span class="date-label">Nov. 9</span>   <strong>Monthly Club Meeting, 7 PM at VFW — Dress in camo!</strong></li>
           <li data-month="2026-11"><span class="date-label">Nov. 11</span>  <span class="date-late">DEADLINE</span> Major Entry Deadline — all major show entries due!</li>
           <li data-month="2026-11"><span class="date-label">Nov. 12</span>  Turkey Pick Up</li>
@@ -1997,6 +2088,17 @@
     updateDatesToggle();
   }
   setupPastDates();
+
+  // ── Bake Sale countdown — card hides itself the day after the sale ──
+  const BAKE_SALE_DATE = '2026-11-08';
+  (function bakeSaleCountdown() {
+    const sale = new Date(BAKE_SALE_DATE + 'T00:00:00');
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const days = Math.round((sale - today) / 86400000);
+    if (days < 0) { document.getElementById('bake-sale-section').style.display = 'none'; return; }
+    document.getElementById('bake-countdown').textContent =
+      days === 0 ? 'Today!' : days === 1 ? 'Tomorrow!' : `${days} days to go`;
+  })();
 
   // ── Flyer Board ──
   // Add new flyers here. `date` = the event/deadline date (sort order + label).
