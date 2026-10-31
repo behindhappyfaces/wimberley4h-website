@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <g id="leaf">
+      <path d="M0 -1.5 C-5 -6 -15 -9 -15 -19 A7.5 7.5 0 0 1 0 -21.5 A7.5 7.5 0 0 1 15 -19 C15 -9 5 -6 0 -1.5 Z" fill="#1e8449"/>
+      <text x="0" y="-9" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="12" text-anchor="middle" fill="#fff">H</text>
+    </g>
+  </defs>
+  <path d="M33 33 Q44 46 46 60" stroke="#1e8449" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+  <g transform="translate(32 31)">
+    <use href="#leaf" transform="rotate(-45)"/>
+    <use href="#leaf" transform="rotate(45)"/>
+    <use href="#leaf" transform="rotate(135)"/>
+    <use href="#leaf" transform="rotate(-135)"/>
+  </g>
+</svg>
