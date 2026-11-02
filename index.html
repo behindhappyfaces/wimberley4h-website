@@ -1380,6 +1380,21 @@
     }
 
     a { color: var(--link-green); }
+
+    /* ── FALL LEAVES — plays once per visit (see FALL_LEAVES in the site script) ── */
+    .leaf-layer { position: fixed; inset: 0; pointer-events: none; z-index: 9999; overflow: hidden; transition: opacity 1.2s; }
+    .leaf-layer.fade { opacity: 0; }
+    .leaf { position: absolute; top: -60px; will-change: transform; animation: leafFall var(--dur) cubic-bezier(.35,.1,.6,1) var(--delay) forwards; }
+    .leaf svg { display: block; width: var(--size); height: var(--size); animation: leafSway var(--sway) ease-in-out var(--delay) infinite alternate; filter: drop-shadow(0 2px 2px rgba(60,30,0,.18)); }
+    @keyframes leafFall {
+      0%   { transform: translate(0, 0); opacity: 0; }
+      8%   { opacity: 1; }
+      100% { transform: translate(var(--drift), 110vh); opacity: .9; }
+    }
+    @keyframes leafSway {
+      0%   { transform: translateX(-18px) rotate(var(--r0)); }
+      100% { transform: translateX(18px)  rotate(var(--r1)); }
+    }
   </style>
 </head>
 <body>
@@ -3085,6 +3100,55 @@
   zone.addEventListener('drop', e => handleGalleryFiles(e.dataTransfer.files));
 
   document.addEventListener('keydown', e => { if (e.key === 'Escape') window.closeLightbox(); });
+</script>
+
+<!-- ═══ FALL LEAVES (first visit of each browser session) ═══ -->
+<script>
+  // Set FALL_LEAVES.on = false (or past the `until` date) to turn this off for the season.
+  const FALL_LEAVES = { on: true, until: '2026-11-30', count: 34 };
+  (function fallLeaves() {
+    const today = new Date().toISOString().slice(0, 10);
+    if (!FALL_LEAVES.on || today > FALL_LEAVES.until) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    try { if (sessionStorage.getItem('leaves-shown')) return; sessionStorage.setItem('leaves-shown', '1'); } catch (e) {}
+
+    const colors = ['#c0392b', '#d35400', '#e67e22', '#f39c12', '#b9770e', '#a04000', '#d4ac0d', '#8e2b1a'];
+    const shapes = [
+      // maple
+      'M50 4 L58 26 L78 16 L72 40 L96 42 L76 58 L86 76 L60 70 L54 96 L46 96 L40 70 L14 76 L24 58 L4 42 L28 40 L22 16 L42 26 Z',
+      // oak-ish
+      'M50 4 C62 12 56 22 66 26 C78 22 80 36 72 42 C84 46 82 60 70 60 C76 72 66 80 56 74 L54 96 L46 96 L44 74 C34 80 24 72 30 60 C18 60 16 46 28 42 C20 36 22 22 34 26 C44 22 38 12 50 4 Z',
+      // simple leaf
+      'M50 4 C80 24 88 56 54 86 L52 96 L48 96 L46 86 C12 56 20 24 50 4 Z'
+    ];
+    const layer = document.createElement('div');
+    layer.className = 'leaf-layer';
+    layer.setAttribute('aria-hidden', 'true');
+    const small = window.innerWidth < 640;
+    const n = small ? Math.round(FALL_LEAVES.count * .6) : FALL_LEAVES.count;
+    let longest = 0;
+    for (let i = 0; i < n; i++) {
+      const rnd = (a, b) => a + Math.random() * (b - a);
+      const dur = rnd(5, 8.5), delay = rnd(0, 2.8);
+      longest = Math.max(longest, dur + delay);
+      const leaf = document.createElement('div');
+      leaf.className = 'leaf';
+      leaf.style.left = rnd(-5, 100) + 'vw';
+      leaf.style.setProperty('--size', rnd(small ? 18 : 22, small ? 32 : 42) + 'px');
+      leaf.style.setProperty('--dur', dur + 's');
+      leaf.style.setProperty('--delay', delay + 's');
+      leaf.style.setProperty('--drift', rnd(-120, 120) + 'px');
+      leaf.style.setProperty('--sway', rnd(1.2, 2.4) + 's');
+      leaf.style.setProperty('--r0', rnd(-60, 0) + 'deg');
+      leaf.style.setProperty('--r1', rnd(20, 90) + 'deg');
+      const c = colors[i % colors.length], d = shapes[i % shapes.length];
+      leaf.innerHTML = `<svg viewBox="0 0 100 100"><path d="${d}" fill="${c}"/><path d="M50 92 L50 22" stroke="rgba(70,30,0,.35)" stroke-width="3" fill="none"/></svg>`;
+      layer.appendChild(leaf);
+    }
+    document.body.appendChild(layer);
+    setTimeout(() => layer.classList.add('fade'), (longest - 1.2) * 1000);
+    setTimeout(() => layer.remove(), (longest + 0.2) * 1000);
+  })();
 </script>
 </body>
 </html>
