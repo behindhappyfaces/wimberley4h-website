@@ -398,132 +398,96 @@
       color: var(--muted);
     }
 
-    /* ── BAKE SALE RECIPE CARD ── */
-    .bake-card {
-      position: relative;
-      overflow: hidden;
-      background: #fffaf0;
+    /* ── BAKE SALE — ticket + 3-step rules ── */
+    .bake {
+      position: relative; display: grid; grid-template-columns: 230px 1fr;
+      background: #fffaf0; border-radius: 16px; overflow: hidden;
+      box-shadow: 0 10px 30px rgba(107,58,18,.18); color: #3b2610;
       border: 1px solid #ecd9b8;
-      border-radius: var(--radius);
-      box-shadow: 0 8px 24px rgba(120,72,20,.18);
-      padding: 34px 30px 26px;
-      color: #4a2f17;
     }
-    .bake-card::before {
-      content: "";
-      position: absolute;
-      inset: 0 0 auto 0;
-      height: 14px;
+    .bake::before {               /* gingham trim */
+      content: ""; position: absolute; inset: 0 0 auto 0; height: 10px; z-index: 2;
       background:
-        repeating-linear-gradient(90deg, rgba(179,23,42,.85) 0 14px, transparent 14px 28px),
-        repeating-linear-gradient(0deg, rgba(179,23,42,.45) 0 7px, #fff 7px 14px);
+        repeating-linear-gradient(90deg, rgba(179,23,42,.9) 0 10px, transparent 10px 20px),
+        repeating-linear-gradient(0deg, rgba(179,23,42,.45) 0 5px, #fff 5px 10px);
     }
-    .bake-card .bake-kicker {
-      font-size: .75rem;
-      font-weight: 800;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 6px;
+    /* left: ticket stub */
+    .bake-ticket {
+      position: relative; background: linear-gradient(170deg, #b3172a, #7d0f1d); color: #fff;
+      padding: 34px 20px 22px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px;
     }
-    .bake-card h2 { margin: 0 0 6px; font-size: 1.7rem; color: #6b3a12; }
-    .bake-card .bake-date { font-size: 1.05rem; margin: 0 0 16px; }
-    .bake-card .bake-countdown {
-      display: inline-block;
-      margin-left: 6px;
-      padding: 2px 10px;
-      border-radius: 999px;
-      background: #6b3a12;
-      color: #fffaf0;
-      font-size: .78rem;
-      font-weight: 800;
-      vertical-align: middle;
+    .bake-ticket::after {          /* perforated edge */
+      content: ""; position: absolute; top: 10px; bottom: 0; right: -7px; width: 14px;
+      background: radial-gradient(circle at 7px 7px, #fffaf0 5px, transparent 5.5px) 0 0 / 14px 16px repeat-y;
     }
-    .bake-lines {
-      background-image: repeating-linear-gradient(180deg, transparent 0 31px, #e6d3b3 31px 32px);
-      line-height: 32px;
-      padding-left: 14px;
-      border-left: 2px solid rgba(179,23,42,.35);
-      margin-bottom: 18px;
-    }
-    .bake-lines p { margin: 0; font-size: .95rem; }
-    .bake-treats { font-size: 1.6rem; letter-spacing: 6px; margin-bottom: 14px; }
-    .bake-stamp {
-      position: absolute;
-      top: 34px;
-      right: 26px;
-      transform: rotate(8deg);
-      border: 3px double var(--accent);
-      color: var(--accent);
-      border-radius: 8px;
-      padding: 8px 14px;
-      font-weight: 900;
-      font-size: .8rem;
-      letter-spacing: .08em;
-      text-align: center;
-      text-transform: uppercase;
-      line-height: 1.25;
-      opacity: .85;
-      background: rgba(255,250,240,.8);
-    }
-    /* Bake sale — city rules alert + "recipe" rule cards */
+    .bake-ticket .date-stack { display: flex; flex-direction: column; align-items: center; }
+    .bake-ticket .dow { font-size: .78rem; font-weight: 800; letter-spacing: .25em; opacity: .85; }
+    .bake-ticket .mon { font-family: var(--font-display); font-size: 1.4rem; font-style: italic; line-height: 1; }
+    .bake-ticket .day { font-family: var(--font-display); font-size: 5rem; font-weight: 700; line-height: .9; }
+    .bake-countdown { display: inline-block; background: #d6a233; color: #16233f; font-weight: 900; font-size: .75rem; padding: 4px 12px; border-radius: 999px; margin: 6px 0 4px; }
+    .bake-countdown:empty { display: none; }
+    .bake-ticket .drop { font-size: .8rem; line-height: 1.35; background: rgba(255,255,255,.12); border: 1px dashed rgba(255,255,255,.45); border-radius: 10px; padding: 8px 10px; margin-top: auto; }
+    .bake-ticket .drop b { display: block; letter-spacing: .1em; text-transform: uppercase; font-size: .68rem; opacity: .85; }
+    .bake-ticket .treats { font-size: 1.3rem; letter-spacing: 3px; margin-top: 8px; }
+    /* right: content */
+    .bake-main { padding: 30px 28px 22px 32px; }
+    .bake-kicker { font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #b3172a; }
+    .bake-main h2 { margin: 2px 0 4px; font-size: 1.75rem; color: #6b3a12; }
+    .bake-pitch { margin: 0 0 14px; font-size: .95rem; }
     .bake-alert {
-      display: flex; align-items: center; gap: 12px;
-      background: #b3172a; color: #fff;
-      border-radius: 10px; padding: 12px 16px; margin: 0 0 18px;
-      text-decoration: none; font-size: .92rem; line-height: 1.35;
-      box-shadow: 0 0 0 0 rgba(179,23,42,.55);
-      animation: bakePulse 2.2s ease-out infinite;
+      display: flex; align-items: center; gap: 10px; background: #16233f; color: #fff;
+      border-radius: 10px; padding: 9px 14px; margin-bottom: 16px; font-size: .86rem; line-height: 1.35;
     }
-    .bake-alert:hover { background: #8f1121; }
-    .bake-alert .bell { font-size: 1.5rem; display: inline-block; animation: bakeRing 2.2s ease-in-out infinite; transform-origin: 50% 0; }
-    .bake-alert strong { display: block; letter-spacing: .06em; text-transform: uppercase; font-size: .78rem; opacity: .9; }
-    .bake-alert .go { margin-left: auto; font-weight: 800; white-space: nowrap; }
-    @keyframes bakePulse { 0% { box-shadow: 0 0 0 0 rgba(179,23,42,.5); } 70% { box-shadow: 0 0 0 12px rgba(179,23,42,0); } 100% { box-shadow: 0 0 0 0 rgba(179,23,42,0); } }
-    @keyframes bakeRing { 0%,60%,100% { transform: rotate(0); } 65% { transform: rotate(16deg); } 72% { transform: rotate(-14deg); } 79% { transform: rotate(10deg); } 86% { transform: rotate(-6deg); } }
-    @media (prefers-reduced-motion: reduce) { .bake-alert, .bake-alert .bell { animation: none; } }
-    .bake-rules { margin-top: 6px; scroll-margin-top: 90px; }
-    .bake-rules h3 { margin: 0 0 4px; font-size: 1.25rem; color: #6b3a12; }
-    .bake-rules .bake-sub { margin: 0 0 14px; font-size: .88rem; opacity: .8; }
-    .bake-tip {
-      background: #fff3c4; border: 2px dashed #d6a233; border-radius: 10px;
-      padding: 12px 16px; margin-bottom: 16px; font-size: .93rem;
+    .bake-alert .bell { font-size: 1.25rem; display: inline-block; animation: bakeRing 2.4s ease-in-out infinite; transform-origin: 50% 0; }
+    .bake-alert b { color: #ffd979; }
+    @keyframes bakeRing { 0%,60%,100% { transform: rotate(0); } 66% { transform: rotate(16deg); } 73% { transform: rotate(-14deg); } 80% { transform: rotate(9deg); } 87% { transform: rotate(-5deg); } }
+    @media (prefers-reduced-motion: reduce) { .bake-alert .bell { animation: none; } }
+    .bake-steps { display: grid; grid-template-columns: 1fr 1.25fr 1.35fr; gap: 12px; counter-reset: step; scroll-margin-top: 90px; }
+    .bake-step { position: relative; background: #fff; border: 1px solid #ecd9b8; border-radius: 12px; padding: 26px 14px 12px; font-size: .84rem; line-height: 1.4; }
+    .bake-step::before {
+      counter-increment: step; content: counter(step);
+      position: absolute; top: -13px; left: 12px; width: 28px; height: 28px; border-radius: 50%;
+      background: #6b3a12; color: #fffaf0; font-weight: 900; font-size: .9rem; display: grid; place-items: center;
+      box-shadow: 0 0 0 3px #fffaf0;
     }
-    .bake-tip b { color: #6b3a12; }
-    .bake-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
-    .bake-box { background: #fff; border: 1px solid #ecd9b8; border-radius: 10px; padding: 14px 16px; font-size: .9rem; }
-    .bake-box h4 { margin: 0 0 8px; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; }
-    .bake-box ul { margin: 0; padding-left: 0; list-style: none; }
-    .bake-box li { padding: 3px 0 3px 24px; position: relative; line-height: 1.4; }
-    .bake-box.yes { border-top: 5px solid #1e8449; }
-    .bake-box.yes h4 { color: #1e8449; }
-    .bake-box.yes li::before { content: "✓"; position: absolute; left: 4px; color: #1e8449; font-weight: 900; }
-    .bake-box.no { border-top: 5px solid #b3172a; }
-    .bake-box.no h4 { color: #b3172a; }
-    .bake-box.no li::before { content: "✕"; position: absolute; left: 4px; color: #b3172a; font-weight: 900; }
-    .bake-label {
-      position: relative; background: #fff; border: 2px solid #6b3a12; border-radius: 6px 22px 22px 6px;
-      padding: 14px 18px; margin-bottom: 14px; font-size: .9rem;
+    .bake-step h4 { margin: 0 0 6px; font-size: .95rem; color: #6b3a12; font-family: var(--font-display); }
+    .bake-step p { margin: 0; }
+    .bake-step.pick { background: #fff3c4; border: 2px solid #d6a233; }
+    .bake-step .ribbon { position: absolute; top: 8px; right: -4px; background: #1e8449; color: #fff; font-size: .62rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px 0 0 4px; }
+    .bake-chips { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+    .bake-chips span { font-size: .74rem; font-weight: 700; padding: 3px 8px; border-radius: 999px; }
+    .bake-chips.yes span { background: rgba(30,132,73,.12); color: #146b38; }
+    .bake-chips.no span { background: rgba(179,23,42,.1); color: #9b1424; text-decoration: line-through; text-decoration-color: rgba(179,23,42,.5); }
+    .bake-chips .lbl { background: none !important; padding-left: 0 !important; text-decoration: none !important; font-weight: 900 !important; }
+    .bake-step ul { margin: 0; padding-left: 16px; }
+    .bake-step li { padding: 1px 0; }
+    .bake-step li::marker { color: #b3172a; }
+    .bake-quote { margin: 6px 0 0; padding: 6px 8px; border-left: 3px solid #b3172a; background: #fff6ea; font-style: italic; font-size: .78rem; }
+    .bake-needs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; padding-top: 12px; border-top: 2px dashed #ecd9b8; font-size: .84rem; align-items: center; }
+    .bake-needs .t { font-weight: 900; color: #6b3a12; text-transform: uppercase; letter-spacing: .1em; font-size: .72rem; }
+    .bake-need { background: #fff; border: 1px solid #ecd9b8; border-radius: 999px; padding: 5px 12px; }
+    .bake-need a { font-weight: 800; color: #b3172a; }
+    .ck-teaser {
+      display: flex; align-items: center; gap: 16px; text-decoration: none; color: #fff;
+      background: linear-gradient(135deg, #1e8449, #146b38); border-radius: 14px; padding: 16px 20px;
+      box-shadow: 0 6px 18px rgba(20,107,56,.25); transition: transform .15s;
     }
-    .bake-label h4 { margin: 0 0 6px; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: #6b3a12; }
-    .bake-label ul { margin: 0; padding-left: 20px; }
-    .bake-label li { padding: 2px 0; line-height: 1.45; }
-    .bake-label li::marker { color: #b3172a; }
-    .bake-label .quote { font-style: italic; }
-    .bake-callouts { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .bake-callout { border-radius: 10px; padding: 12px 16px; font-size: .9rem; line-height: 1.45; }
-    .bake-callout.handler { background: #16233f; color: #fff; }
-    .bake-callout.handler a { color: #d6a233; font-weight: 700; }
-    .bake-callout.help { background: #f3e7c9; color: #4a2f17; }
-    .bake-callout h4 { margin: 0 0 4px; font-size: .95rem; }
-    .bake-callout p { margin: 0; }
-    @media (max-width: 640px) {
-      .bake-grid, .bake-callouts { grid-template-columns: 1fr; }
-      .bake-alert .go { display: none; }
+    .ck-teaser:hover { transform: translateY(-2px); }
+    .ck-teaser .e { font-size: 2.4rem; line-height: 1; }
+    .ck-teaser b { display: block; font-family: var(--font-display); font-size: 1.2rem; }
+    .ck-teaser span.sub { font-size: .86rem; opacity: .92; }
+    .ck-teaser .go { margin-left: auto; background: #d6a233; color: #16233f; font-weight: 900; font-size: .82rem; padding: 8px 14px; border-radius: 999px; white-space: nowrap; }
+    @media (max-width: 640px) { .ck-teaser { flex-wrap: wrap; } .ck-teaser .go { margin-left: 0; } }
+    @media (max-width: 900px) {
+      .bake-steps { grid-template-columns: 1fr; gap: 18px; }
     }
     @media (max-width: 640px) {
-      .bake-card { padding: 30px 20px 22px; }
-      .bake-stamp { position: static; display: inline-block; margin-bottom: 12px; transform: rotate(-3deg); }
+      .bake { grid-template-columns: 1fr; }
+      .bake-ticket { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 4px 12px; padding: 24px 16px 16px; }
+      .bake-ticket::after { display: none; }
+      .bake-ticket .day { font-size: 3.2rem; }
+      .bake-ticket .drop, .bake-ticket .treats { flex-basis: 100%; }
+      .bake-main { padding: 20px 16px 18px; }
     }
     .dates-list li.past-date { display: none; opacity: .6; }
     .dates-list.show-past li.past-date { display: flex; }
@@ -1499,78 +1463,67 @@
 
   <!-- Bake Sale — hides itself after the sale date (see BAKE_SALE_DATE in the site script) -->
   <section style="padding-top:18px; padding-bottom:0" id="bake-sale-section">
-    <div class="bake-card">
-      <div class="bake-stamp">Drop-off details<br>coming soon!</div>
-      <div class="bake-kicker">🧁 Calling All Bakers!</div>
-      <h2>Wimberley 4-H Bake Sale</h2>
-      <p class="bake-date"><strong>Sunday, November 8</strong><span class="bake-countdown" id="bake-countdown"></span></p>
-      <a class="bake-alert" href="#bake-rules" role="alert">
-        <span class="bell" aria-hidden="true">🔔</span>
-        <span><strong>Heads up, bakers!</strong>The City of San Marcos has health rules for this sale — please read them before you bake or buy.</span>
-        <span class="go">Read the rules ↓</span>
-      </a>
-      <div class="bake-treats" aria-hidden="true">🍪🥧🧁🍞🍰🍩</div>
-      <div class="bake-lines">
-        <p><strong>We need your baked goods!</strong> Cookies, pies, cupcakes, breads, and family favorites.</p>
-        <p>📍 Drop-off time &amp; location: <em>to be announced</em></p>
-        <p>👩‍🍳 Start picking your recipe now and preheat those ovens!</p>
-        <p>🔔 Check back here on our website for drop-off details!</p>
+    <div class="bake">
+      <div class="bake-ticket">
+        <div class="date-stack">
+          <span class="dow">SUNDAY</span>
+          <span class="mon">November</span>
+          <span class="day">8</span>
+          <span class="bake-countdown" id="bake-countdown"></span>
+        </div>
+        <div class="drop"><b>📍 Drop-off</b>Time &amp; place to be announced. Check back here!</div>
+        <div class="treats" aria-hidden="true">🍪🥧🍞🍰</div>
       </div>
 
-      <div class="bake-rules" id="bake-rules">
-        <h3>📋 The Recipe for a Rule-Following Bake Sale</h3>
-        <p class="bake-sub">City of San Marcos guidelines for this event</p>
+      <div class="bake-main">
+        <div class="bake-kicker">🧁 Calling All Bakers</div>
+        <h2>Wimberley 4-H Bake Sale</h2>
+        <p class="bake-pitch">We need your baked goods! Here's everything you need to know in 3 quick steps.</p>
+        <div class="bake-alert" role="note"><span class="bell" aria-hidden="true">🔔</span><span><b>City of San Marcos health rules apply.</b> Please read all 3 steps before you bake or buy.</span></div>
 
-        <div class="bake-tip">
-          ⭐ <b>Easiest option: bring store-bought!</b> Because of the labeling rules below, we strongly suggest bringing a store-bought baked good and <b>leaving it in its original packaging</b> — it already has all the required labels. 
-        </div>
+        <div class="bake-steps" id="bake-rules">
+          <div class="bake-step pick">
+            <span class="ribbon">Easiest</span>
+            <h4>Bring store-bought</h4>
+            <p>Buy a baked good and <strong>leave it in its original package</strong>. It already has every label the city requires, so you're done!</p>
+          </div>
 
-        <div class="bake-grid">
-          <div class="bake-box yes">
-            <h4>👍 Allowed</h4>
+          <div class="bake-step">
+            <h4>Check what's allowed</h4>
+            <div class="bake-chips yes"><span class="lbl">✓ OK:</span><span>Breads</span><span>Cookies</span><span>Cakes</span><span>Fruit pies</span><span>Pastries</span><span>Shelf-stable goods</span></div>
+            <div class="bake-chips no"><span class="lbl">✕ NO:</span><span>Cream pies</span><span>Custard</span><span>Meringue</span><span>Cheesecake</span><span>Meat / seafood</span></div>
+            <p style="font-size:.76rem; opacity:.8">Nothing that needs to be refrigerated or kept warm.</p>
+          </div>
+
+          <div class="bake-step">
+            <h4>Homemade? Label it</h4>
+            <p style="margin-bottom:4px">Wrap or cover <strong>each item</strong>, and label it with:</p>
             <ul>
-              <li>Non-refrigerated breads</li>
-              <li>Cookies</li>
-              <li>Cakes</li>
-              <li>Pastries — <em>no</em> cream, custard, or meringue fillings</li>
-              <li>Fruit pies &amp; other shelf-stable baked goods</li>
+              <li>Your name &amp; address</li>
+              <li>What it is (e.g. "Banana Bread")</li>
+              <li>Allergens (milk, eggs, nuts, wheat…)</li>
+              <li>This exact statement:</li>
             </ul>
-          </div>
-          <div class="bake-box no">
-            <h4>🚫 Not Allowed</h4>
-            <ul>
-              <li>Anything needing temperature control</li>
-              <li>Cream pies</li>
-              <li>Custard-filled pastries</li>
-              <li>Meat, poultry, or seafood items</li>
-              <li>Refrigerated cheesecakes</li>
-            </ul>
+            <p class="bake-quote">"Made in a home kitchen that is not inspected by the Department of Health Services or local health department."</p>
           </div>
         </div>
 
-        <div class="bake-label">
-          <h4>🏷️ Homemade? Label requirements</h4>
-          <ul>
-            <li>Every item must be <strong>individually packaged or covered</strong></li>
-            <li>Name &amp; address of the person who made it</li>
-            <li>Common name of the product (e.g. "Chocolate Chip Cookies")</li>
-            <li>Major food allergens it contains (milk, eggs, peanuts, wheat, etc.)</li>
-            <li>This statement: <span class="quote">"Made in a home kitchen that is not inspected by the Department of Health Services or local health department."</span></li>
-          </ul>
-        </div>
-
-        <div class="bake-callouts">
-          <div class="bake-callout handler">
-            <h4>🧤 Got a Food Handler Certificate?</h4>
-            <p>Someone on site must have a <strong>current food handler certificate</strong>. If you have one and will be there, please <a href="mailto:wimberley4h@gmail.com?subject=Bake%20Sale%20-%20Food%20Handler%20Certificate">let us know</a>! Otherwise, someone will need to get one before Sunday. Gloves and bags for sold items will be provided.</p>
-          </div>
-          <div class="bake-callout help">
-            <h4>🎨 Crafty? We need signs!</h4>
-            <p>Help make the sale a success — we need <strong>table signs</strong> and <strong>posterboards</strong> encouraging shoppers to head to Murdoch's.</p>
-          </div>
+        <div class="bake-needs">
+          <span class="t">We also need:</span>
+          <span class="bake-need">🧤 Someone with a current <strong>food handler certificate</strong> on site. <a href="mailto:wimberley4h@gmail.com?subject=Bake%20Sale%20-%20Food%20Handler%20Certificate">Have one? Tell us</a></span>
+          <span class="bake-need">🎨 <strong>Table signs &amp; posterboards</strong> pointing shoppers to Murdoch's</span>
         </div>
       </div>
     </div>
+  </section>
+
+  <!-- Clover Kids teaser → Projects page -->
+  <section style="padding-top:14px; padding-bottom:0">
+    <a class="ck-teaser" href="#clover-kids" onclick="showPage('projects'); setTimeout(() => document.getElementById('clover-kids').scrollIntoView({behavior:'smooth'}), 50); return false;">
+      <span class="e" aria-hidden="true">🍀</span>
+      <span><b>Clover Kids (K–2nd Grade)</b><span class="sub">See the 21 approved projects, hands-on activities, and the full Clover Kids guide (PDF).</span></span>
+      <span class="go">Explore Clover Kids →</span>
+    </a>
   </section>
 
   <section>
