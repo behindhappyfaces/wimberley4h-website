@@ -157,6 +157,7 @@
     }
     .announce-banner a { color: var(--white); text-decoration: underline; font-weight: 800; }
     .announce-banner a:hover { text-decoration: none; }
+    .announce-enroll { background: linear-gradient(135deg, var(--accent), var(--barn)); font-weight: 700; border-top: 1px solid rgba(255,255,255,.25); }
 
     /* ── PAGE WRAPPER ── */
     .page { display: none; }
@@ -509,12 +510,10 @@
       border-radius: 50%; border: 2px solid #6b3a12; background: #fffaf0;
     }
     .bake-label h4 { margin: 0 0 6px; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: #6b3a12; }
-    .bake-label label { display: flex; gap: 8px; align-items: flex-start; padding: 3px 0; cursor: pointer; line-height: 1.4; }
-    .bake-label input { margin-top: 3px; accent-color: #1e8449; flex-shrink: 0; }
-    .bake-label input:checked + span { text-decoration: line-through; opacity: .6; }
+    .bake-label ul { margin: 0; padding-left: 20px; }
+    .bake-label li { padding: 2px 0; line-height: 1.45; }
+    .bake-label li::marker { color: #b3172a; }
     .bake-label .quote { font-style: italic; }
-    .bake-label .done { display: none; margin-top: 6px; font-weight: 800; color: #1e8449; }
-    .bake-label.all-done .done { display: block; }
     .bake-callouts { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     .bake-callout { border-radius: 10px; padding: 12px 16px; font-size: .9rem; line-height: 1.45; }
     .bake-callout.handler { background: #16233f; color: #fff; }
@@ -548,6 +547,42 @@
       text-align: left;
     }
     .dates-toggle:hover { border-color: var(--green); background: rgba(30,132,73,.06); }
+
+    /* ── Upcoming Dates: List / Month view ── */
+    .view-switch { display: inline-flex; border: 1px solid var(--border); border-radius: 999px; overflow: hidden; margin: 2px 0 12px; }
+    .view-switch button { border: 0; background: transparent; font: inherit; font-size: .82rem; font-weight: 700; padding: 6px 14px; cursor: pointer; color: var(--green-dark); }
+    .view-switch button.active { background: var(--green-dark); color: var(--white); }
+    .cal { display: none; }
+    .dates-wrap.month .cal { display: block; }
+    .dates-wrap.month #dates-list, .dates-wrap.month #dates-toggle { display: none !important; }
+    .cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .cal-head h4 { margin: 0; font-size: 1.1rem; color: var(--green-dark); }
+    .cal-head button { border: 1px solid var(--border); background: var(--white); border-radius: 8px; width: 34px; height: 34px; font-size: 1rem; cursor: pointer; color: var(--green-dark); }
+    .cal-head button:hover { border-color: var(--green); }
+    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+    .cal-dow { text-align: center; font-size: .7rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding: 4px 0; }
+    .cal-day { min-height: 84px; border: 1px solid var(--border); border-radius: 8px; padding: 4px 5px; background: var(--white); font-size: .72rem; text-align: left; font-family: inherit; color: inherit; overflow: hidden; }
+    .cal-day.blank { background: transparent; border-color: transparent; }
+    .cal-day .num { display: inline-block; font-weight: 800; font-size: .8rem; color: var(--green-dark); }
+    .cal-day.today { border: 2px solid var(--accent); }
+    .cal-day.today .num { background: var(--accent); color: var(--white); border-radius: 999px; padding: 0 6px; }
+    .cal-day.has { cursor: pointer; background: #fffaf0; }
+    .cal-day.has:hover, .cal-day.sel { border-color: var(--green); box-shadow: 0 0 0 2px rgba(30,132,73,.2); }
+    .cal-ev { display: block; margin-top: 3px; padding: 2px 4px; border-radius: 4px; background: rgba(30,132,73,.12); color: var(--green-dark); line-height: 1.25; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .cal-ev.late { background: rgba(179,23,42,.12); color: var(--barn); }
+    .cal-ev.big { background: rgba(214,162,51,.2); }
+    .cal-detail { margin-top: 12px; border-top: 2px solid var(--border); padding-top: 10px; }
+    .cal-detail h5 { margin: 0 0 4px; font-size: .9rem; color: var(--green-dark); }
+    .cal-detail ul { list-style: none; margin: 0; padding: 0; }
+    .cal-detail li { padding: 6px 0; border-bottom: 1px solid var(--border); font-size: .9rem; }
+    .cal-detail li:last-child { border-bottom: 0; }
+    .cal-empty { color: var(--muted); font-size: .85rem; margin: 8px 0 0; }
+    @media (max-width: 640px) {
+      .cal-day { min-height: 48px; padding: 3px; }
+      .cal-ev { font-size: 0; padding: 0; width: 7px; height: 7px; border-radius: 50%; display: inline-block; margin: 3px 2px 0 0; background: var(--green); }
+      .cal-ev.late { background: var(--barn); }
+      .cal-ev.big { background: var(--accent); }
+    }
 
     /* ── OFFICERS TREE ── */
     .officers-tree {
@@ -1355,6 +1390,10 @@
 <div class="announce-banner">
   📰 Monthly 4-H Newsletters from the Extension Office are now posted on our Resources page — <a href="newsletter-november-2026.pdf" target="_blank">View November Newsletter →</a>
 </div>
+<div class="announce-banner announce-enroll">
+  DO NOT FORGET! Texas 4-H has a brand-new enrollment site — create your family's new account and enroll for 2026–2027.
+  <a href="https://tx4h.tamu.edu/welcome" target="_blank">Click Here</a>
+</div>
 
 <!-- ═══ HEADER ═══ -->
 <header>
@@ -1463,14 +1502,15 @@
           </div>
         </div>
 
-        <div class="bake-label" id="bake-label-check">
-          <h4>🏷️ Homemade? Your label checklist</h4>
-          <p style="margin:0 0 6px; font-size:.86rem">Every item must be <strong>individually packaged or covered</strong> and labeled with:</p>
-          <label><input type="checkbox"><span>Name &amp; address of the person who made it</span></label>
-          <label><input type="checkbox"><span>Common name of the product (e.g. "Chocolate Chip Cookies")</span></label>
-          <label><input type="checkbox"><span>Major food allergens it contains (milk, eggs, peanuts, wheat, etc.)</span></label>
-          <label><input type="checkbox"><span>This statement: <span class="quote">"Made in a home kitchen that is not inspected by the Department of Health Services or local health department."</span></span></label>
-          <div class="done">🎉 Label ready — you're good to go!</div>
+        <div class="bake-label">
+          <h4>🏷️ Homemade? Label requirements</h4>
+          <ul>
+            <li>Every item must be <strong>individually packaged or covered</strong></li>
+            <li>Name &amp; address of the person who made it</li>
+            <li>Common name of the product (e.g. "Chocolate Chip Cookies")</li>
+            <li>Major food allergens it contains (milk, eggs, peanuts, wheat, etc.)</li>
+            <li>This statement: <span class="quote">"Made in a home kitchen that is not inspected by the Department of Health Services or local health department."</span></li>
+          </ul>
         </div>
 
         <div class="bake-callouts">
@@ -1484,15 +1524,6 @@
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <section style="padding-top:10px; padding-bottom:0">
-    <div class="card" style="padding:10px 18px; text-align:center; background:linear-gradient(135deg, var(--accent), var(--barn)); color:var(--white); box-shadow:0 4px 14px rgba(179,23,42,.25)">
-      <p style="margin:0; font-size:.85rem; font-weight:700; letter-spacing:.02em">
-        DO NOT FORGET! Texas 4-H has a brand-new enrollment site — create your family's new account and enroll for 2026–2027.
-        <a href="https://tx4h.tamu.edu/welcome" target="_blank" style="color:var(--white); text-decoration:underline; font-weight:800">Click Here</a>
-      </p>
     </div>
   </section>
 
@@ -1544,6 +1575,20 @@
             Full Year Timeline PDF ↗
           </a>
         </h3>
+        <div class="dates-wrap" id="dates-wrap">
+        <div class="view-switch" role="tablist" aria-label="Choose how to view dates">
+          <button type="button" class="active" data-view="list" onclick="setDatesView('list')">📋 List</button>
+          <button type="button" data-view="month" onclick="setDatesView('month')">📅 Month</button>
+        </div>
+        <div class="cal" id="dates-cal">
+          <div class="cal-head">
+            <button type="button" onclick="calMove(-1)" aria-label="Previous month">‹</button>
+            <h4 id="cal-title"></h4>
+            <button type="button" onclick="calMove(1)" aria-label="Next month">›</button>
+          </div>
+          <div class="cal-grid" id="cal-grid"></div>
+          <div class="cal-detail" id="cal-detail"></div>
+        </div>
         <button class="dates-toggle" id="dates-toggle" onclick="togglePastDates()"></button>
         <ul class="dates-list" id="dates-list">
           <li data-month="2026-05"><span class="date-label">May 25</span>   Star Award Applications Due</li>
@@ -1577,12 +1622,13 @@
           <li data-month="2026-11"><span class="date-label">Nov. 11</span>  <span class="date-late">DEADLINE</span> Major Entry Deadline — all major show entries due!</li>
           <li data-month="2026-11"><span class="date-label">Nov. 11</span>  <span>🦃 Turkey Pick Up, AgriLife Extension Office (200 Stillwater Rd., Ste. 102, Wimberley)<br><em style="font-size:.85rem; color:var(--muted)">*Pick up time announced day of pick up</em></span></li>
           <li data-month="2026-12"><span class="date-label">Dec. 1</span>   <span class="date-late">RSVP DEADLINE</span> December Meeting / Christmas Dinner (Google doc posted to GroupMe)</li>
-          <li data-month="2026-12"><span class="date-label">Dec. 11</span>  Broiler Pick Up, time TBA</li>
+          <li data-month="2026-12"><span class="date-label">Dec. 11</span>  <span>🐔 Broiler Pick Up<br><em style="font-size:.85rem; color:var(--muted)">*Pick up time announced day of pick up</em></span></li>
           <li data-month="2026-12"><span class="date-label">Dec. 14</span>  <strong>Club Meeting — Ugly Sweater Party!</strong></li>
           <li data-month="2026-12"><span class="date-label">Dec. 16</span>  <span class="date-late">DEADLINE</span> HCLS Entry Deadline — <strong class="date-late" style="text-transform:uppercase">⚠️ Late fees are $300 per project!</strong></li>
           <li data-month="2026-12"><span class="date-label">Dec. 18</span>  Deadline to Order Show Pen Signs (Google doc posted to GroupMe)</li>
           <li data-month="2026-12"><span class="date-label">Dec. 19</span>  Rabbit Validation, 8–11 AM, Buda VoAg</li>
         </ul>
+        </div><!-- /dates-wrap -->
         <p style="margin-top:12px; font-size:.85rem; color:var(--muted)">
           <a href="https://hays.agrilife.org/4-h-youth/newsletters/" target="_blank">Hays County 4-H Newsletter</a> ·
           <a href="https://e3cda8c1-4704-48ae-9dd2-9e904aee125e.filesusr.com/ugd/74dc4d_a9452d5c48294e19b3302ff484ef4358.pdf" target="_blank">Wimberley 4-H Yearly Planner PDF</a>
@@ -2275,6 +2321,81 @@
   }
   setupPastDates();
 
+  // ── Upcoming Dates month calendar — built from the list above, no extra data entry ──
+  // Parses each <li>'s date-label ("Nov. 5", "Oct. 20 & 22", "May 22–25") within its data-month.
+  const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const calEvents = {};   // 'YYYY-MM-DD' -> [li, ...]
+  document.querySelectorAll('#dates-list li[data-month]').forEach(li => {
+    const ym = li.dataset.month;
+    const label = (li.querySelector('.date-label') || {}).textContent || '';
+    const nums = label.replace(/^[A-Za-z.]+\s*/, '');
+    let days = [];
+    const range = nums.match(/(\d+)\s*[–-]\s*(\d+)/);
+    if (range) { for (let d = +range[1]; d <= +range[2]; d++) days.push(d); }
+    else days = (nums.match(/\d+/g) || []).map(Number);
+    days.forEach(d => {
+      const key = `${ym}-${String(d).padStart(2, '0')}`;
+      (calEvents[key] = calEvents[key] || []).push(li);
+    });
+  });
+  const calNow = new Date();
+  let calYear = calNow.getFullYear(), calMonth = calNow.getMonth();
+  function calSummary(li) {
+    const clone = li.cloneNode(true);
+    clone.querySelector('.date-label')?.remove();
+    clone.querySelectorAll('br, em').forEach(n => n.remove());
+    return clone.textContent.replace(/\s+/g, ' ').trim();
+  }
+  function renderCal(selKey) {
+    const grid = document.getElementById('cal-grid');
+    document.getElementById('cal-title').textContent = `${MONTHS[calMonth]} ${calYear}`;
+    const first = new Date(calYear, calMonth, 1).getDay();
+    const total = new Date(calYear, calMonth + 1, 0).getDate();
+    const todayKey = `${calNow.getFullYear()}-${String(calNow.getMonth() + 1).padStart(2, '0')}-${String(calNow.getDate()).padStart(2, '0')}`;
+    let html = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(d => `<div class="cal-dow">${d}</div>`).join('');
+    for (let i = 0; i < first; i++) html += '<div class="cal-day blank"></div>';
+    let monthHasEvents = false;
+    for (let d = 1; d <= total; d++) {
+      const key = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+      const evs = calEvents[key] || [];
+      if (evs.length) monthHasEvents = true;
+      const cls = ['cal-day', evs.length ? 'has' : '', key === todayKey ? 'today' : '', key === selKey ? 'sel' : ''].join(' ');
+      const chips = evs.map(li => {
+        const kind = li.querySelector('.date-late') ? 'late' : li.querySelector('strong') ? 'big' : '';
+        const t = calSummary(li).replace(/"/g, '&quot;');
+        return `<span class="cal-ev ${kind}" title="${t}">${t}</span>`;
+      }).join('');
+      html += evs.length
+        ? `<button type="button" class="${cls}" onclick="calPick('${key}')" aria-label="${MONTHS[calMonth]} ${d}: ${evs.length} event${evs.length > 1 ? 's' : ''}"><div class="num">${d}</div>${chips}</button>`
+        : `<div class="${cls}"><div class="num">${d}</div></div>`;
+    }
+    grid.innerHTML = html;
+    const detail = document.getElementById('cal-detail');
+    if (selKey && calEvents[selKey]) {
+      const d = +selKey.slice(8);
+      detail.innerHTML = `<h5>${MONTHS[calMonth]} ${d}</h5><ul>` +
+        calEvents[selKey].map(li => { const c = li.cloneNode(true); c.querySelector('.date-label')?.remove(); return `<li>${c.innerHTML}</li>`; }).join('') + '</ul>';
+    } else {
+      detail.innerHTML = monthHasEvents
+        ? '<p class="cal-empty">Tap a highlighted day to see the details.</p>'
+        : '<p class="cal-empty">No dates posted for this month yet.</p>';
+    }
+  }
+  function calPick(key) { renderCal(key); }
+  function calMove(step) {
+    calMonth += step;
+    if (calMonth < 0) { calMonth = 11; calYear--; }
+    if (calMonth > 11) { calMonth = 0; calYear++; }
+    renderCal();
+  }
+  function setDatesView(view) {
+    document.getElementById('dates-wrap').classList.toggle('month', view === 'month');
+    document.querySelectorAll('.view-switch button').forEach(b => b.classList.toggle('active', b.dataset.view === view));
+    if (view === 'month') renderCal();
+    try { localStorage.setItem('dates-view', view); } catch (e) {}
+  }
+  try { if (localStorage.getItem('dates-view') === 'month') setDatesView('month'); } catch (e) {}
+
   // ── Deadline popup — once per visit, stops appearing after the deadline day ──
   const DEADLINE_POPUP = { id: 'horse-validation-2026', date: '2026-11-01' };
   function closeDeadlinePop() {
@@ -2302,15 +2423,6 @@
     if (days < 0) { document.getElementById('bake-sale-section').style.display = 'none'; return; }
     document.getElementById('bake-countdown').textContent =
       days === 0 ? 'Today!' : days === 1 ? 'Tomorrow!' : `${days} days to go`;
-  })();
-
-  // Bake sale label checklist — celebrate when all boxes are ticked
-  (function bakeLabelCheck() {
-    const box = document.getElementById('bake-label-check');
-    if (!box) return;
-    const inputs = box.querySelectorAll('input[type=checkbox]');
-    inputs.forEach(i => i.addEventListener('change', () =>
-      box.classList.toggle('all-done', [...inputs].every(x => x.checked))));
   })();
 
   // ── Flyer Board ──
