@@ -465,6 +465,67 @@
       opacity: .85;
       background: rgba(255,250,240,.8);
     }
+    /* Bake sale — city rules alert + "recipe" rule cards */
+    .bake-alert {
+      display: flex; align-items: center; gap: 12px;
+      background: #b3172a; color: #fff;
+      border-radius: 10px; padding: 12px 16px; margin: 0 0 18px;
+      text-decoration: none; font-size: .92rem; line-height: 1.35;
+      box-shadow: 0 0 0 0 rgba(179,23,42,.55);
+      animation: bakePulse 2.2s ease-out infinite;
+    }
+    .bake-alert:hover { background: #8f1121; }
+    .bake-alert .bell { font-size: 1.5rem; display: inline-block; animation: bakeRing 2.2s ease-in-out infinite; transform-origin: 50% 0; }
+    .bake-alert strong { display: block; letter-spacing: .06em; text-transform: uppercase; font-size: .78rem; opacity: .9; }
+    .bake-alert .go { margin-left: auto; font-weight: 800; white-space: nowrap; }
+    @keyframes bakePulse { 0% { box-shadow: 0 0 0 0 rgba(179,23,42,.5); } 70% { box-shadow: 0 0 0 12px rgba(179,23,42,0); } 100% { box-shadow: 0 0 0 0 rgba(179,23,42,0); } }
+    @keyframes bakeRing { 0%,60%,100% { transform: rotate(0); } 65% { transform: rotate(16deg); } 72% { transform: rotate(-14deg); } 79% { transform: rotate(10deg); } 86% { transform: rotate(-6deg); } }
+    @media (prefers-reduced-motion: reduce) { .bake-alert, .bake-alert .bell { animation: none; } }
+    .bake-rules { margin-top: 6px; scroll-margin-top: 90px; }
+    .bake-rules h3 { margin: 0 0 4px; font-size: 1.25rem; color: #6b3a12; }
+    .bake-rules .bake-sub { margin: 0 0 14px; font-size: .88rem; opacity: .8; }
+    .bake-tip {
+      background: #fff3c4; border: 2px dashed #d6a233; border-radius: 10px;
+      padding: 12px 16px; margin-bottom: 16px; font-size: .93rem;
+    }
+    .bake-tip b { color: #6b3a12; }
+    .bake-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+    .bake-box { background: #fff; border: 1px solid #ecd9b8; border-radius: 10px; padding: 14px 16px; font-size: .9rem; }
+    .bake-box h4 { margin: 0 0 8px; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; }
+    .bake-box ul { margin: 0; padding-left: 0; list-style: none; }
+    .bake-box li { padding: 3px 0 3px 24px; position: relative; line-height: 1.4; }
+    .bake-box.yes { border-top: 5px solid #1e8449; }
+    .bake-box.yes h4 { color: #1e8449; }
+    .bake-box.yes li::before { content: "✓"; position: absolute; left: 4px; color: #1e8449; font-weight: 900; }
+    .bake-box.no { border-top: 5px solid #b3172a; }
+    .bake-box.no h4 { color: #b3172a; }
+    .bake-box.no li::before { content: "✕"; position: absolute; left: 4px; color: #b3172a; font-weight: 900; }
+    .bake-label {
+      position: relative; background: #fff; border: 2px solid #6b3a12; border-radius: 6px 22px 22px 6px;
+      padding: 14px 18px 14px 34px; margin-bottom: 14px; font-size: .9rem;
+    }
+    .bake-label::before {
+      content: ""; position: absolute; left: 12px; top: 50%; width: 10px; height: 10px; margin-top: -5px;
+      border-radius: 50%; border: 2px solid #6b3a12; background: #fffaf0;
+    }
+    .bake-label h4 { margin: 0 0 6px; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: #6b3a12; }
+    .bake-label label { display: flex; gap: 8px; align-items: flex-start; padding: 3px 0; cursor: pointer; line-height: 1.4; }
+    .bake-label input { margin-top: 3px; accent-color: #1e8449; flex-shrink: 0; }
+    .bake-label input:checked + span { text-decoration: line-through; opacity: .6; }
+    .bake-label .quote { font-style: italic; }
+    .bake-label .done { display: none; margin-top: 6px; font-weight: 800; color: #1e8449; }
+    .bake-label.all-done .done { display: block; }
+    .bake-callouts { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .bake-callout { border-radius: 10px; padding: 12px 16px; font-size: .9rem; line-height: 1.45; }
+    .bake-callout.handler { background: #16233f; color: #fff; }
+    .bake-callout.handler a { color: #d6a233; font-weight: 700; }
+    .bake-callout.help { background: #f3e7c9; color: #4a2f17; }
+    .bake-callout h4 { margin: 0 0 4px; font-size: .95rem; }
+    .bake-callout p { margin: 0; }
+    @media (max-width: 640px) {
+      .bake-grid, .bake-callouts { grid-template-columns: 1fr; }
+      .bake-alert .go { display: none; }
+    }
     @media (max-width: 640px) {
       .bake-card { padding: 30px 20px 22px; }
       .bake-stamp { position: static; display: inline-block; margin-bottom: 12px; transform: rotate(-3deg); }
@@ -1292,7 +1353,7 @@
 
 <!-- ═══ SITE-WIDE ANNOUNCEMENT BANNER ═══ -->
 <div class="announce-banner">
-  📰 Monthly 4-H Newsletters from the Extension Office are now posted on our Resources page — <a href="newsletter-october-2026.pdf" target="_blank">View October Newsletter →</a>
+  📰 Monthly 4-H Newsletters from the Extension Office are now posted on our Resources page — <a href="newsletter-november-2026.pdf" target="_blank">View November Newsletter →</a>
 </div>
 
 <!-- ═══ HEADER ═══ -->
@@ -1358,12 +1419,70 @@
       <div class="bake-kicker">🧁 Calling All Bakers!</div>
       <h2>Wimberley 4-H Bake Sale</h2>
       <p class="bake-date"><strong>Sunday, November 8</strong><span class="bake-countdown" id="bake-countdown"></span></p>
+      <a class="bake-alert" href="#bake-rules" role="alert">
+        <span class="bell" aria-hidden="true">🔔</span>
+        <span><strong>Heads up, bakers!</strong>The City of San Marcos has health rules for this sale — please read them before you bake or buy.</span>
+        <span class="go">Read the rules ↓</span>
+      </a>
       <div class="bake-treats" aria-hidden="true">🍪🥧🧁🍞🍰🍩</div>
       <div class="bake-lines">
         <p><strong>We need your baked goods!</strong> Cookies, pies, cupcakes, breads, and family favorites.</p>
         <p>📍 Drop-off time &amp; location: <em>to be announced</em></p>
         <p>👩‍🍳 Start picking your recipe now and preheat those ovens!</p>
         <p>🔔 Check back here on our website for drop-off details!</p>
+      </div>
+
+      <div class="bake-rules" id="bake-rules">
+        <h3>📋 The Recipe for a Rule-Following Bake Sale</h3>
+        <p class="bake-sub">City of San Marcos guidelines for this event</p>
+
+        <div class="bake-tip">
+          ⭐ <b>Easiest option: bring store-bought!</b> Because of the labeling rules below, we strongly suggest bringing a store-bought baked good and <b>leaving it in its original packaging</b> — it already has all the required labels. 
+        </div>
+
+        <div class="bake-grid">
+          <div class="bake-box yes">
+            <h4>👍 Allowed</h4>
+            <ul>
+              <li>Non-refrigerated breads</li>
+              <li>Cookies</li>
+              <li>Cakes</li>
+              <li>Pastries — <em>no</em> cream, custard, or meringue fillings</li>
+              <li>Fruit pies &amp; other shelf-stable baked goods</li>
+            </ul>
+          </div>
+          <div class="bake-box no">
+            <h4>🚫 Not Allowed</h4>
+            <ul>
+              <li>Anything needing temperature control</li>
+              <li>Cream pies</li>
+              <li>Custard-filled pastries</li>
+              <li>Meat, poultry, or seafood items</li>
+              <li>Refrigerated cheesecakes</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bake-label" id="bake-label-check">
+          <h4>🏷️ Homemade? Your label checklist</h4>
+          <p style="margin:0 0 6px; font-size:.86rem">Every item must be <strong>individually packaged or covered</strong> and labeled with:</p>
+          <label><input type="checkbox"><span>Name &amp; address of the person who made it</span></label>
+          <label><input type="checkbox"><span>Common name of the product (e.g. "Chocolate Chip Cookies")</span></label>
+          <label><input type="checkbox"><span>Major food allergens it contains (milk, eggs, peanuts, wheat, etc.)</span></label>
+          <label><input type="checkbox"><span>This statement: <span class="quote">"Made in a home kitchen that is not inspected by the Department of Health Services or local health department."</span></span></label>
+          <div class="done">🎉 Label ready — you're good to go!</div>
+        </div>
+
+        <div class="bake-callouts">
+          <div class="bake-callout handler">
+            <h4>🧤 Got a Food Handler Certificate?</h4>
+            <p>Someone on site must have a <strong>current food handler certificate</strong>. If you have one and will be there, please <a href="mailto:wimberley4h@gmail.com?subject=Bake%20Sale%20-%20Food%20Handler%20Certificate">let us know</a>! Otherwise, someone will need to get one before Sunday. Gloves and bags for sold items will be provided.</p>
+          </div>
+          <div class="bake-callout help">
+            <h4>🎨 Crafty? We need signs!</h4>
+            <p>Help make the sale a success — we need <strong>table signs</strong> and <strong>posterboards</strong> encouraging shoppers to head to Murdoch's.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1453,7 +1572,7 @@
           <li data-month="2026-11"><span class="date-label">Nov. 1</span>   Horse Validation Deadline</li>
           <li data-month="2026-11"><span class="date-label">Nov. 5</span>   <span><strong>VFW Thanksgiving Dinner</strong> — we feed the VFW dinner! Sign up to bring a side or dessert on <a href="https://m.signupgenius.com/#!/showSignUp/8050949AFAC29A6F94-66487476-2026?useFullSite=false" target="_blank">SignUpGenius ↗</a>. More details to come.</span></li>
           <li data-month="2026-11"><span class="date-label">Nov. 7</span>   <span class="date-late">LATE</span> Swine Tag Orders Close · Swine Validation, 8–11 AM, DSRP</li>
-          <li data-month="2026-11"><span class="date-label">Nov. 8</span>   <span><strong>🧁 Bake Sale</strong> — we need baked goods! Drop-off details coming soon. Check back here!</span></li>
+          <li data-month="2026-11"><span class="date-label">Nov. 8</span>   <span><strong>🧁 Bake Sale</strong> — we need baked goods! Drop-off details coming soon. <a href="#bake-rules">Read the city bake sale rules</a> before you bake!</span></li>
           <li data-month="2026-11"><span class="date-label">Nov. 9</span>   <strong>Monthly Club Meeting, 7 PM at VFW — Dress in camo!</strong></li>
           <li data-month="2026-11"><span class="date-label">Nov. 11</span>  <span class="date-late">DEADLINE</span> Major Entry Deadline — all major show entries due!</li>
           <li data-month="2026-11"><span class="date-label">Nov. 11</span>  <span>🦃 Turkey Pick Up, AgriLife Extension Office (200 Stillwater Rd., Ste. 102, Wimberley)<br><em style="font-size:.85rem; color:var(--muted)">*Pick up time announced day of pick up</em></span></li>
@@ -2028,6 +2147,7 @@
         <h3>📰 Monthly 4-H Newsletter</h3>
         <p style="font-size:.85rem; color:var(--muted); margin-bottom:8px">From the Hays County AgriLife Extension Office.</p>
         <ul class="pdf-list">
+          <li><a href="newsletter-november-2026.pdf" target="_blank"><span class="badge">PDF</span>November 2026</a></li>
           <li><a href="newsletter-october-2026.pdf" target="_blank"><span class="badge">PDF</span>October 2026</a></li>
           <li><a href="newsletter-september-2026.pdf" target="_blank"><span class="badge">PDF</span>September 2026</a></li>
         </ul>
@@ -2182,6 +2302,15 @@
     if (days < 0) { document.getElementById('bake-sale-section').style.display = 'none'; return; }
     document.getElementById('bake-countdown').textContent =
       days === 0 ? 'Today!' : days === 1 ? 'Tomorrow!' : `${days} days to go`;
+  })();
+
+  // Bake sale label checklist — celebrate when all boxes are ticked
+  (function bakeLabelCheck() {
+    const box = document.getElementById('bake-label-check');
+    if (!box) return;
+    const inputs = box.querySelectorAll('input[type=checkbox]');
+    inputs.forEach(i => i.addEventListener('change', () =>
+      box.classList.toggle('all-done', [...inputs].every(x => x.checked))));
   })();
 
   // ── Flyer Board ──
