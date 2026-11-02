@@ -761,6 +761,56 @@
     .link-card:hover .go { transform: translate(2px, -2px); color: var(--accent); }
 
     /* ── PROJECTS PAGE ── */
+    /* ── CLOVER KIDS CORNER (Projects page) ── */
+    .ck {
+      position: relative; overflow: hidden;
+      background: radial-gradient(circle at 100% 0, rgba(255,255,255,.18) 0 120px, transparent 121px), linear-gradient(160deg, #1e8449, #146b38);
+      color: #fff; border-radius: 18px; padding: 34px 30px 30px;
+      box-shadow: 0 10px 30px rgba(20,107,56,.3);
+    }
+    .ck::after { content: "🍀"; position: absolute; right: -10px; top: -18px; font-size: 140px; opacity: .14; transform: rotate(18deg); pointer-events: none; }
+    .ck-kicker { display: inline-block; background: #d6a233; color: #16233f; font-weight: 900; font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; padding: 4px 12px; border-radius: 999px; transform: rotate(-2deg); }
+    .ck h2 { font-size: 2.1rem; margin: 10px 0 6px; color: #fff; }
+    .ck-lead { max-width: 640px; opacity: .95; margin: 0 0 18px; line-height: 1.55; }
+    .ck-facts { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 26px; }
+    .ck-fact { background: rgba(255,255,255,.14); border: 1px dashed rgba(255,255,255,.5); border-radius: 12px; padding: 8px 14px; font-size: .88rem; }
+    .ck-fact b { color: #ffe08a; }
+    .ck-fact a { color: #ffe08a; font-weight: 800; }
+    .ck-panel { background: #fffaf0; color: #3b2a14; border-radius: 14px; padding: 22px 22px 18px; margin-bottom: 18px; }
+    .ck-panel h3 { margin: 0 0 4px; color: #146b38; font-size: 1.3rem; }
+    .ck-panel .sub { margin: 0 0 16px; font-size: .88rem; color: #7a6a52; }
+    .ck-stickers { display: flex; flex-wrap: wrap; gap: 10px; }
+    .ck-sticker {
+      display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px; border-radius: 999px;
+      font-weight: 700; font-size: .88rem; background: var(--c); color: #2b1d0c;
+      box-shadow: 0 2px 0 rgba(0,0,0,.12); transform: rotate(var(--r, 0deg)); transition: transform .15s;
+    }
+    .ck-sticker:hover { transform: rotate(0) scale(1.08); }
+    .ck-sticker .e { font-size: 1.15rem; }
+    .ck-curricula { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .ck-curr { background: #fff; border: 2px solid #1e8449; border-radius: 12px; padding: 14px; text-align: center; font-weight: 800; color: #146b38; }
+    .ck-curr .e { display: block; font-size: 2rem; margin-bottom: 4px; }
+    .ck-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+    .ck-tab { border: 2px solid var(--c); background: #fff; color: #2b1d0c; border-radius: 999px; padding: 7px 14px; font: inherit; font-weight: 800; font-size: .85rem; cursor: pointer; }
+    .ck-tab.active { background: var(--c); }
+    .ck-area { display: none; }
+    .ck-area.active { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+    .ck-topic { background: #fff; border-radius: 10px; border-top: 5px solid var(--c); padding: 12px 14px; font-size: .86rem; }
+    .ck-topic h4 { margin: 0 0 6px; font-size: .95rem; }
+    .ck-topic ul { margin: 0; padding-left: 18px; }
+    .ck-topic li { padding: 1px 0; }
+    .ck-notes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .ck-note { background: rgba(255,255,255,.12); border-radius: 12px; padding: 14px; font-size: .88rem; line-height: 1.45; }
+    .ck-note .e { font-size: 1.5rem; display: block; margin-bottom: 4px; }
+    .ck-cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    .ck-btn { display: inline-block; background: #d6a233; color: #16233f; font-weight: 900; padding: 11px 18px; border-radius: 10px; text-decoration: none; }
+    .ck-btn.alt { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.7); }
+    .ck-btn:hover { filter: brightness(1.07); }
+    @media (max-width: 700px) {
+      .ck { padding: 26px 18px 22px; }
+      .ck h2 { font-size: 1.7rem; }
+      .ck-curricula, .ck-notes { grid-template-columns: 1fr; }
+    }
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -1866,6 +1916,110 @@
 
     </div>
   </section>
+
+  <!-- Clover Kids Corner — content from the Texas 4-H Clover Kids packet (clover-kids-approved-projects.pdf) -->
+  <section id="clover-kids" style="padding-top:0">
+    <div class="ck">
+      <span class="ck-kicker">🍀 Kindergarten – 2nd Grade</span>
+      <h2>Clover Kids Corner</h2>
+      <p class="ck-lead">Clover Kids is the 4-H program for our youngest members. Kids learn by doing in hands-on, cooperative activities. They make new friends, build confidence, and get a taste of everything 4-H offers before moving on to project work in 3rd grade.</p>
+      <div class="ck-facts">
+        <span class="ck-fact">🕡 Meets at <b>6:30 PM</b> before each monthly club meeting, Wimberley VFW</span>
+        <span class="ck-fact">💵 <b>$10</b> enrollment through <a href="https://tx4h.tamu.edu/login" target="_blank">4-H Connect ↗</a></span>
+        <span class="ck-fact">🏅 Non-competitive, so everyone earns a <b>participation award</b></span>
+      </div>
+
+      <div class="ck-panel">
+        <h3>⭐ Approved Clover Kids Projects</h3>
+        <p class="sub">Approved by Texas A&amp;M AgriLife Extension for K–2 members</p>
+        <div class="ck-stickers">
+            <span class="ck-sticker" style="--c:#ffd6e0; --r:-2deg"><span class="e" aria-hidden="true">🐰</span>Rabbits</span>
+            <span class="ck-sticker" style="--c:#ffe9a8; --r:1.5deg"><span class="e" aria-hidden="true">🐔</span>Poultry</span>
+            <span class="ck-sticker" style="--c:#ffd8b5; --r:-1deg"><span class="e" aria-hidden="true">🐶</span>Dog Care &amp; Training</span>
+            <span class="ck-sticker" style="--c:#f3e7c9; --r:2deg"><span class="e" aria-hidden="true">🌾</span>Agronomy</span>
+            <span class="ck-sticker" style="--c:#cfe8ff; --r:-1.5deg"><span class="e" aria-hidden="true">🛒</span>Consumer Education</span>
+            <span class="ck-sticker" style="--c:#f5d0ff; --r:1deg"><span class="e" aria-hidden="true">👗</span>Fashion &amp; Interior Design</span>
+            <span class="ck-sticker" style="--c:#ffd3c2; --r:0deg"><span class="e" aria-hidden="true">🥕</span>Food &amp; Nutrition</span>
+            <span class="ck-sticker" style="--c:#d8f5d0; --r:-2deg"><span class="e" aria-hidden="true">🩹</span>Health &amp; Personal Safety</span>
+            <span class="ck-sticker" style="--c:#e6f7b8; --r:1.5deg"><span class="e" aria-hidden="true">🌻</span>Gardening &amp; Horticulture</span>
+            <span class="ck-sticker" style="--c:#c9eef5; --r:-1deg"><span class="e" aria-hidden="true">🎣</span>Sportfishing</span>
+            <span class="ck-sticker" style="--c:#f1dcc0; --r:2deg"><span class="e" aria-hidden="true">🤠</span>Range Science</span>
+            <span class="ck-sticker" style="--c:#bfe3ff; --r:-1.5deg"><span class="e" aria-hidden="true">🐠</span>Aquatic Science</span>
+            <span class="ck-sticker" style="--c:#ffc9c9; --r:1deg"><span class="e" aria-hidden="true">🐞</span>Entomology</span>
+            <span class="ck-sticker" style="--c:#cdebd3; --r:0deg"><span class="e" aria-hidden="true">🌲</span>Forestry</span>
+            <span class="ck-sticker" style="--c:#e8dcc8; --r:-2deg"><span class="e" aria-hidden="true">🦌</span>Wildlife &amp; Fisheries</span>
+            <span class="ck-sticker" style="--c:#dcd6ff; --r:1.5deg"><span class="e" aria-hidden="true">🔬</span>STEM</span>
+            <span class="ck-sticker" style="--c:#ffe1f0; --r:-1deg"><span class="e" aria-hidden="true">📸</span>Photography</span>
+            <span class="ck-sticker" style="--c:#d6e4ec; --r:2deg"><span class="e" aria-hidden="true">🤖</span>Robotics</span>
+            <span class="ck-sticker" style="--c:#d0f0e8; --r:-1.5deg"><span class="e" aria-hidden="true">💻</span>Computer Science</span>
+            <span class="ck-sticker" style="--c:#ffecc2; --r:1deg"><span class="e" aria-hidden="true">🎤</span>Public Speaking</span>
+            <span class="ck-sticker" style="--c:#efd6ff; --r:0deg"><span class="e" aria-hidden="true">🎭</span>Theater &amp; Performance Arts</span>
+        </div>
+      </div>
+
+      <div class="ck-panel">
+        <h3>📚 Approved Curricula</h3>
+        <p class="sub">Programs Clover Kids leaders can use during meetings</p>
+        <div class="ck-curricula">
+          <div class="ck-curr"><span class="e" aria-hidden="true">🐣</span>Hatching in the Classroom</div>
+          <div class="ck-curr"><span class="e" aria-hidden="true">🎉</span>Yea 4-H!</div>
+          <div class="ck-curr"><span class="e" aria-hidden="true">🌱</span>Junior Master Gardener</div>
+        </div>
+      </div>
+
+      <div class="ck-panel">
+        <h3>🖐️ Explore the Big 5 Project Areas</h3>
+        <p class="sub">Tap an area to see the hands-on activities from the Clover Kids guide</p>
+        <div class="ck-tabs" role="tablist">
+            <button type="button" class="ck-tab active" style="--c:#ffb4a2" onclick="ckTab('fch')" data-area="fch">🏡 Family &amp; Community Health</button>
+            <button type="button" class="ck-tab" style="--c:#ffd166" onclick="ckTab('ag')" data-area="ag">🐄 Agriculture &amp; Livestock</button>
+            <button type="button" class="ck-tab" style="--c:#95d5b2" onclick="ckTab('nr')" data-area="nr">🌿 Natural Resources</button>
+            <button type="button" class="ck-tab" style="--c:#a2d2ff" onclick="ckTab('lead')" data-area="lead">🎤 Leadership &amp; Citizenship</button>
+            <button type="button" class="ck-tab" style="--c:#cdb4db" onclick="ckTab('stem')" data-area="stem">🔭 STEM &amp; Photography</button>
+        </div>
+          <div class="ck-area active" id="ck-fch">
+              <div class="ck-topic" style="--c:#ffb4a2"><h4>Fun with Foods</h4><ul><li>Build a Better Plate</li><li>Mystery Taste Test</li><li>Where Does Breakfast Come From?</li></ul></div>
+              <div class="ck-topic" style="--c:#ffb4a2"><h4>Safety</h4><ul><li>Safety at Home</li><li>Bicycles &amp; Other Wheels</li><li>This Is an Emergency!</li><li>Thumbs Up! Thumbs Down!</li></ul></div>
+              <div class="ck-topic" style="--c:#ffb4a2"><h4>Money Management</h4><ul><li>Needs vs. Wants Sort</li><li>Savings Jar Challenge</li><li>Chore Store</li></ul></div>
+              <div class="ck-topic" style="--c:#ffb4a2"><h4>Physical Skills</h4><ul><li>Mock Track Meet</li><li>Coat Race</li><li>Bicycle Skill Games</li></ul></div>
+              <div class="ck-topic" style="--c:#ffb4a2"><h4>More Fun</h4><ul><li>Rainbow Plate Challenge</li><li>Germ Busters</li><li>Build-a-Feelings-Face</li><li>My Helping Hands</li></ul></div>
+          </div>
+          <div class="ck-area" id="ck-ag">
+              <div class="ck-topic" style="--c:#ffd166"><h4>Exploring Plants</h4><ul><li>How Seeds Germinate &amp; Grow</li><li>Potting a Plant</li><li>Field Trips</li><li>Rooting Plant Cuttings</li><li>An Experiment with Light</li><li>Planting a Terrarium</li></ul></div>
+              <div class="ck-topic" style="--c:#ffd166"><h4>Pets</h4><ul><li>Landlubber Aquarium</li><li>Pet Scene</li><li>Pet Mobile</li><li>Pet Display</li></ul></div>
+              <div class="ck-topic" style="--c:#ffd166"><h4>More Fun</h4><ul><li>Guess the Baby Animal</li><li>What Do Farm Animals Eat?</li><li>From Cotton Field to T-Shirt</li><li>Barnyard Bingo</li><li>Paper Plate Farm Animal Craft</li></ul></div>
+          </div>
+          <div class="ck-area" id="ck-nr">
+              <div class="ck-topic" style="--c:#95d5b2"><h4>Outdoors</h4><ul><li>Bird Feeders</li><li>Water Cycle in a Bag</li><li>Sort It Out! Recycle, Reuse, Trash</li></ul></div>
+              <div class="ck-topic" style="--c:#95d5b2"><h4>Explore &amp; Protect</h4><ul><li>Leaf &amp; Bark Rubbing Hunt</li><li>Whose Habitat Is It?</li><li>Litter Bug Clean-Up Relay</li></ul></div>
+          </div>
+          <div class="ck-area" id="ck-lead">
+              <div class="ck-topic" style="--c:#a2d2ff"><h4>Meet Me</h4><ul><li>Autobiography</li><li>Getting Acquainted</li><li>Human Bingo</li><li>All About Me Poster</li><li>What Matters to Me</li><li>Scavenger Hunt</li><li>Shadow Art</li></ul></div>
+              <div class="ck-topic" style="--c:#a2d2ff"><h4>Manners</h4><ul><li>Good Manners Puppet Show</li><li>Manners Match-Up</li><li>Kindness Bingo</li><li>Role-Playing: Conflict &amp; Resolution</li></ul></div>
+              <div class="ck-topic" style="--c:#a2d2ff"><h4>Citizenship</h4><ul><li>Rule Detectives</li><li>Our Class Votes!</li><li>Building Our Community</li><li>Helping My Community Collage</li><li>Texas &amp; American Flag Craft</li></ul></div>
+              <div class="ck-topic" style="--c:#a2d2ff"><h4>Geography</h4><ul><li>Make a Puzzle</li><li>I'm Going to Take a Trip</li><li>What Am I?</li><li>Around the World Day</li><li>Bake a State</li><li>Lewis &amp; Clark Expeditions</li></ul></div>
+              <div class="ck-topic" style="--c:#a2d2ff"><h4>Careers</h4><ul><li>What's Your Trade?</li><li>Spinning Yarns</li><li>Dress for a Career</li></ul></div>
+              <div class="ck-topic" style="--c:#a2d2ff"><h4>Performing Arts</h4><ul><li>Pantomimes</li><li>Mother Goose Charades</li><li>Making Puppets</li><li>Paper Mache</li><li>Constructing Musical Instruments</li><li>Freeze Dance Rhythm Game</li></ul></div>
+          </div>
+          <div class="ck-area" id="ck-stem">
+              <div class="ck-topic" style="--c:#cdb4db"><h4>Science &amp; Space</h4><ul><li>Be the Sun, Earth &amp; Moon</li><li>Make a Constellation Viewer</li><li>Sun Dial</li><li>Human Sun Dial</li><li>Moon Phase Dance</li></ul></div>
+              <div class="ck-topic" style="--c:#cdb4db"><h4>Back to Nature Art</h4><ul><li>Cardboard Loom Weaving</li><li>Pinch Pot</li><li>Nature Sewing</li><li>Foam Tray Printing</li><li>Seed Mosaic</li><li>Making Paper from Nature</li><li>Sand Casting</li></ul></div>
+              <div class="ck-topic" style="--c:#cdb4db"><h4>STEM &amp; Photo Labs</h4><ul><li>Picture Hunt: My Favorite Things</li><li>Shadow &amp; Light Photography</li><li>Sink or Float Science Lab</li><li>Straw &amp; Tape Bridge Challenge</li></ul></div>
+          </div>
+      </div>
+
+      <div class="ck-notes">
+        <div class="ck-note"><span class="e" aria-hidden="true">🎪</span><b>How projects are shown:</b> Clover Kids can't enter the competitive events for grades 3–12. Instead they share their work at Extension-approved, non-competitive Clover Kids events.</div>
+        <div class="ck-note"><span class="e" aria-hidden="true">👨‍👩‍👧</span><b>Families welcome!</b> Parents, grandparents, guardians, and siblings can all help. Volunteers are the heart of Clover Kids.</div>
+        <div class="ck-note"><span class="e" aria-hidden="true">✅</span><b>Volunteering?</b> Adults apply through 4-H Connect. The application includes a background check and online training videos.</div>
+      </div>
+
+      <div class="ck-cta">
+        <a class="ck-btn" href="clover-kids-approved-projects.pdf" target="_blank">📄 Download the Full Clover Kids Guide (PDF)</a>
+        <a class="ck-btn alt" href="mailto:wimberley4h@gmail.com?subject=Clover%20Kids">✉️ Questions? Email us</a>
+      </div>
+    </div>
+  </section>
 </div>
 
 
@@ -1914,7 +2068,7 @@
         <div class="step-num">4</div>
         <div class="step-body">
           <h3>Attend your first meeting</h3>
-          <p>Meetings are held monthly at the Wimberley VFW. Clover Kids (K–2) program starts at 6:30 PM; general meeting at 7:00 PM. Check the home page for the next meeting date.</p>
+          <p>Meetings are held monthly at the Wimberley VFW. Clover Kids (K–2) program starts at 6:30 PM (<a href="#" onclick="showPage('projects'); setTimeout(() => document.getElementById('clover-kids').scrollIntoView({behavior:'smooth'}), 50); return false;">see approved Clover Kids projects</a>); general meeting at 7:00 PM. Check the home page for the next meeting date.</p>
         </div>
       </div>
 
@@ -2186,6 +2340,7 @@
           <li><a href="https://e3cda8c1-4704-48ae-9dd2-9e904aee125e.filesusr.com/ugd/74dc4d_98af7033a23749559f84321266b3a041.pdf" target="_blank"><span class="badge">PDF</span>Eligibility / Absence Request Info</a></li>
           <li><a href="https://e3cda8c1-4704-48ae-9dd2-9e904aee125e.filesusr.com/ugd/74dc4d_1ef98d4d5af849f78a16d597104d6d04.pdf" target="_blank"><span class="badge">PDF</span>Scholarship Information</a></li>
           <li><a href="https://e3cda8c1-4704-48ae-9dd2-9e904aee125e.filesusr.com/ugd/74dc4d_e67c24c7238e4fe4b76c4cf791d79d25.pdf" target="_blank"><span class="badge">PDF</span>(Additional Handout)</a></li>
+          <li><a href="clover-kids-approved-projects.pdf" target="_blank"><span class="badge">PDF</span>Clover Kids (K–2) Approved Projects &amp; Activity Guide</a></li>
         </ul>
       </div>
 
@@ -2320,6 +2475,12 @@
     updateDatesToggle();
   }
   setupPastDates();
+
+  // Clover Kids — Big 5 area tabs
+  function ckTab(key) {
+    document.querySelectorAll('.ck-tab').forEach(b => b.classList.toggle('active', b.dataset.area === key));
+    document.querySelectorAll('.ck-area').forEach(a => a.classList.toggle('active', a.id === 'ck-' + key));
+  }
 
   // ── Upcoming Dates month calendar — built from the list above, no extra data entry ──
   // Parses each <li>'s date-label ("Nov. 5", "Oct. 20 & 22", "May 22–25") within its data-month.
