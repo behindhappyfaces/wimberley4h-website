@@ -1385,15 +1385,16 @@
     .leaf-layer { position: fixed; inset: 0; pointer-events: none; z-index: 9999; overflow: hidden; transition: opacity 1.2s; }
     .leaf-layer.fade { opacity: 0; }
     .leaf { position: absolute; top: -60px; will-change: transform; animation: leafFall var(--dur) cubic-bezier(.35,.1,.6,1) var(--delay) forwards; }
-    .leaf svg { display: block; width: var(--size); height: var(--size); animation: leafSway var(--sway) ease-in-out var(--delay) infinite alternate; filter: drop-shadow(0 2px 2px rgba(60,30,0,.18)); }
+    .leaf svg { display: block; width: var(--size); height: calc(var(--size) * 1.2); animation: leafSway var(--sway) ease-in-out var(--delay) infinite alternate; filter: drop-shadow(0 2px 2px rgba(60,30,0,.18)); }
     @keyframes leafFall {
       0%   { transform: translate(0, 0); opacity: 0; }
       8%   { opacity: 1; }
       100% { transform: translate(var(--drift), 110vh); opacity: .9; }
     }
     @keyframes leafSway {
-      0%   { transform: translateX(-18px) rotate(var(--r0)); }
-      100% { transform: translateX(18px)  rotate(var(--r1)); }
+      0%   { transform: translateX(-22px) rotate(var(--r0)) rotateY(0deg); }
+      50%  { transform: translateX(0) rotate(calc((var(--r0) + var(--r1)) / 2)) rotateY(var(--flip)); }
+      100% { transform: translateX(22px)  rotate(var(--r1)) rotateX(35deg); }
     }
   </style>
 </head>
@@ -3112,14 +3113,23 @@
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     try { if (sessionStorage.getItem('leaves-shown')) return; sessionStorage.setItem('leaves-shown', '1'); } catch (e) {}
 
-    const colors = ['#c0392b', '#d35400', '#e67e22', '#f39c12', '#b9770e', '#a04000', '#d4ac0d', '#8e2b1a'];
-    const shapes = [
-      // maple
-      'M50 4 L58 26 L78 16 L72 40 L96 42 L76 58 L86 76 L60 70 L54 96 L46 96 L40 70 L14 76 L24 58 L4 42 L28 40 L22 16 L42 26 Z',
-      // oak-ish
-      'M50 4 C62 12 56 22 66 26 C78 22 80 36 72 42 C84 46 82 60 70 60 C76 72 66 80 56 74 L54 96 L46 96 L44 74 C34 80 24 72 30 60 C18 60 16 46 28 42 C20 36 22 22 34 26 C44 22 38 12 50 4 Z',
-      // simple leaf
-      'M50 4 C80 24 88 56 54 86 L52 96 L48 96 L46 86 C12 56 20 24 50 4 Z'
+    // [light, dark] fall tones — each leaf gets a two-tone gradient
+    const palettes = [['#f1948a', '#b03a2e'], ['#f8c471', '#ca6f1e'], ['#f9e79f', '#d4ac0d'], ['#eb984e', '#873600'],
+                      ['#e59866', '#6e2c00'], ['#ec7063', '#78281f'], ['#f5b041', '#a04000'], ['#dc7633', '#7b241c']];
+    // Realistic leaf outlines (viewBox 0 0 100 120) + their vein lines
+    const leaves = [
+      { // maple
+        body: 'M50 90 L57 84 L66 88 L68 82 L78 84 L74 74 L64 70 L74 66 L80 70 L84 62 L96 60 L90 52 L94 46 L84 46 L84 38 L76 44 L62 52 L64 40 L70 38 L66 28 L72 24 L60 22 L56 10 L50 2 L44 10 L40 22 L28 24 L34 28 L30 38 L36 40 L38 52 L24 44 L16 38 L16 46 L6 46 L10 52 L4 60 L16 62 L20 70 L26 66 L36 70 L26 74 L22 84 L32 82 L34 88 L43 84 Z',
+        veins: 'M50 90 L50 8 M50 72 L92 58 M50 72 L8 58 M50 80 L76 83 M50 80 L24 83 M50 50 L66 30 M50 50 L34 30 M70 63 L82 46 M30 63 L18 46'
+      },
+      { // oak
+        body: 'M50 96 C56 94 58 90 56 86 C66 90 72 84 66 78 C60 76 58 74 60 72 C72 76 80 66 72 60 C64 58 62 56 62 54 C76 54 80 42 70 38 C64 38 62 36 62 34 C72 30 70 18 60 20 C58 20 58 18 58 16 C60 8 54 4 50 4 C46 4 40 8 42 16 C42 18 42 20 40 20 C30 18 28 30 38 34 C38 36 36 38 30 38 C20 42 24 54 38 54 C38 56 36 58 28 60 C20 66 28 76 40 72 C42 74 40 76 34 78 C28 84 34 90 44 86 C42 90 44 94 50 96 Z',
+        veins: 'M50 96 L50 8 M50 82 L64 80 M50 82 L36 80 M50 68 L70 64 M50 68 L30 64 M50 50 L70 44 M50 50 L30 44 M50 32 L64 24 M50 32 L36 24'
+      },
+      { // elm / birch — oval with toothed edge
+        body: 'M50 96 L46 92 L40 90 L38 86 L32 82 L30 78 L24 72 L24 68 L19 62 L20 58 L16 52 L18 48 L16 42 L19 38 L19 32 L23 29 L25 23 L30 21 L33 15 L38 14 L42 8 L46 8 L50 2 L54 8 L58 8 L62 14 L67 15 L70 21 L75 23 L77 29 L81 32 L81 38 L84 42 L82 48 L84 52 L80 58 L81 62 L76 68 L76 72 L70 78 L68 82 L62 86 L60 90 L54 92 Z',
+        veins: 'M50 96 L50 6 M50 80 L30 66 M50 80 L70 66 M50 64 L24 50 M50 64 L76 50 M50 48 L24 34 M50 48 L76 34 M50 32 L34 18 M50 32 L66 18'
+      }
     ];
     const layer = document.createElement('div');
     layer.className = 'leaf-layer';
@@ -3129,21 +3139,28 @@
     let longest = 0;
     for (let i = 0; i < n; i++) {
       const rnd = (a, b) => a + Math.random() * (b - a);
-      const dur = rnd(5, 8.5), delay = rnd(0, 2.8);
+      const dur = rnd(5.5, 9), delay = rnd(0, 2.8);
       longest = Math.max(longest, dur + delay);
-      const leaf = document.createElement('div');
-      leaf.className = 'leaf';
-      leaf.style.left = rnd(-5, 100) + 'vw';
-      leaf.style.setProperty('--size', rnd(small ? 18 : 22, small ? 32 : 42) + 'px');
-      leaf.style.setProperty('--dur', dur + 's');
-      leaf.style.setProperty('--delay', delay + 's');
-      leaf.style.setProperty('--drift', rnd(-120, 120) + 'px');
-      leaf.style.setProperty('--sway', rnd(1.2, 2.4) + 's');
-      leaf.style.setProperty('--r0', rnd(-60, 0) + 'deg');
-      leaf.style.setProperty('--r1', rnd(20, 90) + 'deg');
-      const c = colors[i % colors.length], d = shapes[i % shapes.length];
-      leaf.innerHTML = `<svg viewBox="0 0 100 100"><path d="${d}" fill="${c}"/><path d="M50 92 L50 22" stroke="rgba(70,30,0,.35)" stroke-width="3" fill="none"/></svg>`;
-      layer.appendChild(leaf);
+      const el = document.createElement('div');
+      el.className = 'leaf';
+      el.style.left = rnd(-5, 100) + 'vw';
+      el.style.setProperty('--size', rnd(small ? 24 : 28, small ? 40 : 54) + 'px');
+      el.style.setProperty('--dur', dur + 's');
+      el.style.setProperty('--delay', delay + 's');
+      el.style.setProperty('--drift', rnd(-140, 140) + 'px');
+      el.style.setProperty('--sway', rnd(1.1, 2.2) + 's');
+      el.style.setProperty('--r0', rnd(-70, -10) + 'deg');
+      el.style.setProperty('--r1', rnd(20, 100) + 'deg');
+      el.style.setProperty('--flip', rnd(40, 75) + 'deg');
+      const [light, dark] = palettes[Math.floor(Math.random() * palettes.length)];
+      const L = leaves[i % leaves.length], id = 'lg' + i;
+      el.innerHTML =
+        `<svg viewBox="0 0 100 120"><defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1">` +
+        `<stop offset="0" stop-color="${light}"/><stop offset="1" stop-color="${dark}"/></linearGradient></defs>` +
+        `<path d="M50 90 Q51 104 47 118" stroke="#6e3b12" stroke-width="2.6" fill="none" stroke-linecap="round"/>` +
+        `<path d="${L.body}" fill="url(#${id})" stroke="${dark}" stroke-width="1.2" stroke-linejoin="round"/>` +
+        `<path d="${L.veins}" stroke="rgba(90,40,5,.45)" stroke-width="1.3" fill="none" stroke-linecap="round"/></svg>`;
+      layer.appendChild(el);
     }
     document.body.appendChild(layer);
     setTimeout(() => layer.classList.add('fade'), (longest - 1.2) * 1000);
