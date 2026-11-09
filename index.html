@@ -387,6 +387,8 @@
     }
     .deadline-pop-box h3 { margin: 0 0 6px; font-size: 1.4rem; color: var(--green-dark); }
     .deadline-pop-box p { margin: 0 0 20px; color: var(--text); }
+    .deadline-pop-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+    .deadline-pop-actions .later { background: none; border: none; color: var(--muted); font-weight: 700; cursor: pointer; text-decoration: underline; }
     .deadline-pop-close {
       position: absolute;
       top: 10px;
@@ -398,76 +400,65 @@
       color: var(--muted);
     }
 
-    /* ── BAKE SALE — ticket + 3-step rules ── */
-    .bake {
-      position: relative; display: grid; grid-template-columns: 230px 1fr;
-      background: #fffaf0; border-radius: 16px; overflow: hidden;
-      box-shadow: 0 10px 30px rgba(107,58,18,.18); color: #3b2610;
-      border: 1px solid #ecd9b8;
+    /* ── HCYLS REGISTRATION — exhibitor back-number card ── */
+    .hcyls {
+      display: grid; grid-template-columns: 260px 1fr; border-radius: 18px; overflow: hidden;
+      background: #fbf6ea; border: 1px solid #ead9b0; box-shadow: 0 10px 28px rgba(22,35,63,.18);
     }
-    .bake::before {               /* gingham trim */
-      content: ""; position: absolute; inset: 0 0 auto 0; height: 10px; z-index: 2;
-      background:
-        repeating-linear-gradient(90deg, rgba(179,23,42,.9) 0 10px, transparent 10px 20px),
-        repeating-linear-gradient(0deg, rgba(179,23,42,.45) 0 5px, #fff 5px 10px);
+    .hcyls-tag-wrap {
+      background: linear-gradient(160deg, #16233f, #0d1629); display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 14px; padding: 30px 20px; position: relative;
     }
-    /* left: ticket stub */
-    .bake-ticket {
-      position: relative; background: linear-gradient(170deg, #b3172a, #7d0f1d); color: #fff;
-      padding: 34px 20px 22px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px;
+    .hcyls-tag {
+      position: relative; width: 190px; background: #fff; color: #16233f; border-radius: 6px;
+      padding: 26px 12px 14px; text-align: center; transform: rotate(-4deg);
+      box-shadow: 0 8px 18px rgba(0,0,0,.4); animation: hcylsSway 5s ease-in-out infinite; transform-origin: 50% -30px;
     }
-    .bake-ticket::after {          /* perforated edge */
-      content: ""; position: absolute; top: 10px; bottom: 0; right: -7px; width: 14px;
-      background: radial-gradient(circle at 7px 7px, #fffaf0 5px, transparent 5.5px) 0 0 / 14px 16px repeat-y;
+    .hcyls-tag::before, .hcyls-tag::after {   /* safety-pin holes */
+      content: ''; position: absolute; top: 9px; width: 10px; height: 10px; border-radius: 50%;
+      background: #0d1629; box-shadow: inset 0 0 0 2px #c9ccd4;
     }
-    .bake-ticket .date-stack { display: flex; flex-direction: column; align-items: center; }
-    .bake-ticket .dow { font-size: .78rem; font-weight: 800; letter-spacing: .25em; opacity: .85; }
-    .bake-ticket .mon { font-family: var(--font-display); font-size: 1.4rem; font-style: italic; line-height: 1; }
-    .bake-ticket .day { font-family: var(--font-display); font-size: 5rem; font-weight: 700; line-height: .9; }
-    .bake-countdown { display: inline-block; background: #d6a233; color: #16233f; font-weight: 900; font-size: .75rem; padding: 4px 12px; border-radius: 999px; margin: 6px 0 4px; }
-    .bake-countdown:empty { display: none; }
-    .bake-ticket .bake-time { font-weight: 900; font-size: 1.05rem; letter-spacing: .06em; margin-top: 6px; }
-    .bake-ticket .drop { font-size: .8rem; line-height: 1.35; background: rgba(255,255,255,.12); border: 1px dashed rgba(255,255,255,.45); border-radius: 10px; padding: 8px 10px; margin-top: auto; }
-    .bake-ticket .drop b { display: block; letter-spacing: .1em; text-transform: uppercase; font-size: .68rem; opacity: .85; }
-    .bake-ticket .treats { font-size: 1.3rem; letter-spacing: 3px; margin-top: 8px; }
-    /* right: content */
-    .bake-main { padding: 30px 28px 22px 32px; }
-    .bake-kicker { font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #b3172a; }
-    .bake-main h2 { margin: 2px 0 4px; font-size: 1.75rem; color: #6b3a12; }
-    .bake-pitch { margin: 0 0 14px; font-size: .95rem; }
-    .bake-alert {
-      display: flex; align-items: center; gap: 10px; background: #16233f; color: #fff;
-      border-radius: 10px; padding: 9px 14px; margin-bottom: 16px; font-size: .86rem; line-height: 1.35;
+    .hcyls-tag::before { left: 12px; } .hcyls-tag::after { right: 12px; }
+    .hcyls-tag .lbl { font-size: .62rem; font-weight: 900; letter-spacing: .3em; color: #1e8449; }
+    .hcyls-tag .num { font-family: var(--font-display); font-size: 4.2rem; font-weight: 800; line-height: .95; letter-spacing: -.02em; }
+    .hcyls-tag .show { font-size: .66rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; border-top: 2px solid #16233f; margin-top: 6px; padding-top: 6px; line-height: 1.3; }
+    @keyframes hcylsSway { 0%,100% { transform: rotate(-4deg); } 50% { transform: rotate(2deg); } }
+    .hcyls-clock { display: flex; gap: 6px; }
+    .hcyls-clock div { background: rgba(255,255,255,.1); border: 1px solid rgba(214,162,51,.5); border-radius: 8px; padding: 6px 8px; min-width: 50px; text-align: center; color: #fff; }
+    .hcyls-clock b { display: block; font-family: var(--font-display); font-size: 1.4rem; line-height: 1; color: #d6a233; }
+    .hcyls-clock span { font-size: .58rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; opacity: .8; }
+    .hcyls-clock-cap { color: #fff; font-size: .7rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; opacity: .75; margin-top: -6px; }
+    .hcyls-main { padding: 28px 30px 24px; }
+    .hcyls-kicker { display: inline-flex; align-items: center; gap: 8px; font-size: .72rem; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; color: #1e8449; }
+    .hcyls-kicker .dot { width: 9px; height: 9px; border-radius: 50%; background: #1e8449; animation: hcylsPulse 1.6s ease-out infinite; }
+    @keyframes hcylsPulse { 0% { box-shadow: 0 0 0 0 rgba(30,132,73,.6); } 100% { box-shadow: 0 0 0 10px rgba(30,132,73,0); } }
+    .hcyls-main h2 { margin: 4px 0 6px; font-size: 1.75rem; color: #16233f; }
+    .hcyls-pitch { margin: 0 0 14px; font-size: .95rem; }
+    .hcyls-deadline {
+      display: flex; gap: 12px; align-items: center; background: #16233f; color: #fff; border-radius: 12px;
+      padding: 12px 16px; margin-bottom: 16px; border-left: 6px solid #c0392b;
     }
-    .bake-alert .bell { font-size: 1.25rem; display: inline-block; animation: bakeRing 2.4s ease-in-out infinite; transform-origin: 50% 0; }
-    .bake-alert b { color: #ffd979; }
-    @keyframes bakeRing { 0%,60%,100% { transform: rotate(0); } 66% { transform: rotate(16deg); } 73% { transform: rotate(-14deg); } 80% { transform: rotate(9deg); } 87% { transform: rotate(-5deg); } }
-    @media (prefers-reduced-motion: reduce) { .bake-alert .bell { animation: none; } }
-    .bake-steps { display: grid; grid-template-columns: 1fr 1.25fr 1.35fr; gap: 12px; counter-reset: step; scroll-margin-top: 90px; }
-    .bake-step { position: relative; background: #fff; border: 1px solid #ecd9b8; border-radius: 12px; padding: 26px 14px 12px; font-size: .84rem; line-height: 1.4; }
-    .bake-step::before {
-      counter-increment: step; content: counter(step);
-      position: absolute; top: -13px; left: 12px; width: 28px; height: 28px; border-radius: 50%;
-      background: #6b3a12; color: #fffaf0; font-weight: 900; font-size: .9rem; display: grid; place-items: center;
-      box-shadow: 0 0 0 3px #fffaf0;
+    .hcyls-deadline .e { font-size: 1.6rem; }
+    .hcyls-deadline b { color: #ffd979; }
+    .hcyls-deadline small { display: block; opacity: .85; font-size: .8rem; }
+    .hcyls-cta { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; margin-bottom: 18px; }
+    .hcyls-btn {
+      display: inline-flex; align-items: center; gap: 8px; background: #d6a233; color: #16233f; font-weight: 900;
+      text-decoration: none; padding: 13px 22px; border-radius: 999px; font-size: 1rem;
+      box-shadow: 0 6px 0 #a87b1c; transition: transform .1s, box-shadow .1s;
     }
-    .bake-step h4 { margin: 0 0 6px; font-size: .95rem; color: #6b3a12; font-family: var(--font-display); }
-    .bake-step p { margin: 0; }
-    .bake-step.pick { background: #fff3c4; border: 2px solid #d6a233; }
-    .bake-step .ribbon { position: absolute; top: 8px; right: -4px; background: #1e8449; color: #fff; font-size: .62rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px 0 0 4px; }
-    .bake-chips { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
-    .bake-chips span { font-size: .74rem; font-weight: 700; padding: 3px 8px; border-radius: 999px; }
-    .bake-chips.yes span { background: rgba(30,132,73,.12); color: #146b38; }
-    .bake-chips.no span { background: rgba(179,23,42,.1); color: #9b1424; text-decoration: line-through; text-decoration-color: rgba(179,23,42,.5); }
-    .bake-chips .lbl { background: none !important; padding-left: 0 !important; text-decoration: none !important; font-weight: 900 !important; }
-    .bake-step ul { margin: 0; padding-left: 16px; }
-    .bake-step li { padding: 1px 0; }
-    .bake-step li::marker { color: #b3172a; }
-    .bake-quote { margin: 6px 0 0; padding: 6px 8px; border-left: 3px solid #b3172a; background: #fff6ea; font-style: italic; font-size: .78rem; }
-    .bake-needs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; padding-top: 12px; border-top: 2px dashed #ecd9b8; font-size: .84rem; align-items: center; }
-    .bake-needs .t { font-weight: 900; color: #6b3a12; text-transform: uppercase; letter-spacing: .1em; font-size: .72rem; }
-    .bake-need { background: #fff; border: 1px solid #ecd9b8; border-radius: 999px; padding: 5px 12px; }
-    .bake-need a { font-weight: 800; color: #b3172a; }
+    .hcyls-btn:hover { transform: translateY(2px); box-shadow: 0 4px 0 #a87b1c; }
+    .hcyls-btn:active { transform: translateY(6px); box-shadow: none; }
+    .hcyls-cta .alt { font-size: .84rem; color: #16233f; font-weight: 700; }
+    .hcyls-check-h { font-size: .72rem; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; color: #6b5a2e; margin: 0 0 8px; }
+    .hcyls-check { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .hcyls-check li { position: relative; background: #fff; border: 1px solid #ead9b0; border-radius: 10px; padding: 9px 10px 9px 36px; font-size: .84rem; line-height: 1.35; }
+    .hcyls-check li::before { content: '✓'; position: absolute; left: 10px; top: 8px; width: 18px; height: 18px; border-radius: 4px; background: #1e8449; color: #fff; font-size: .72rem; font-weight: 900; display: grid; place-items: center; }
+    .hcyls-check li.shirt { background: #fff3c4; border-color: #d6a233; }
+    .hcyls-check li.shirt::before { content: '👕'; background: none; font-size: .95rem; }
+    .hcyls-help { margin: 14px 0 0; padding-top: 12px; border-top: 2px dashed #ead9b0; font-size: .84rem; }
+    .hcyls-help a { color: #1e8449; font-weight: 800; }
+    @media (prefers-reduced-motion: reduce) { .hcyls-tag, .hcyls-kicker .dot { animation: none; } }
     .ck-teaser {
       display: flex; align-items: center; gap: 16px; text-decoration: none; color: #fff;
       background: linear-gradient(135deg, #1e8449, #146b38); border-radius: 14px; padding: 16px 20px;
@@ -479,16 +470,14 @@
     .ck-teaser span.sub { font-size: .86rem; opacity: .92; }
     .ck-teaser .go { margin-left: auto; background: #d6a233; color: #16233f; font-weight: 900; font-size: .82rem; padding: 8px 14px; border-radius: 999px; white-space: nowrap; }
     @media (max-width: 640px) { .ck-teaser { flex-wrap: wrap; } .ck-teaser .go { margin-left: 0; } }
-    @media (max-width: 900px) {
-      .bake-steps { grid-template-columns: 1fr; gap: 18px; }
-    }
-    @media (max-width: 640px) {
-      .bake { grid-template-columns: 1fr; }
-      .bake-ticket { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 4px 12px; padding: 24px 16px 16px; }
-      .bake-ticket::after { display: none; }
-      .bake-ticket .day { font-size: 3.2rem; }
-      .bake-ticket .drop, .bake-ticket .treats { flex-basis: 100%; }
-      .bake-main { padding: 20px 16px 18px; }
+    @media (max-width: 760px) {
+      .hcyls { grid-template-columns: 1fr; }
+      .hcyls-tag-wrap { flex-direction: row; flex-wrap: wrap; padding: 24px 16px; gap: 16px 20px; }
+      .hcyls-tag { width: 150px; }
+      .hcyls-tag .num { font-size: 3.2rem; }
+      .hcyls-main { padding: 20px 16px 18px; }
+      .hcyls-main h2 { font-size: 1.45rem; }
+      .hcyls-check { grid-template-columns: 1fr; }
     }
     .dates-list li.past-date { display: none; opacity: .6; }
     .dates-list.show-past li.past-date { display: flex; }
@@ -1405,11 +1394,14 @@
 <div class="deadline-pop" id="deadline-pop" onclick="if (event.target === this) closeDeadlinePop()">
   <div class="deadline-pop-box" role="dialog" aria-modal="true" aria-labelledby="deadline-pop-title">
     <button class="deadline-pop-close" onclick="closeDeadlinePop()" aria-label="Close">✕</button>
-    <div class="pop-emoji">🐴</div>
+    <div class="pop-emoji">🐮🐷🐐</div>
     <div class="pop-when" id="deadline-pop-when"></div>
-    <h3 id="deadline-pop-title">Horse Validation Deadline</h3>
-    <p><strong>Sunday, November 1</strong><br>Don't miss it. Get your horse validation in on time!</p>
-    <button class="btn" style="background:var(--green); color:var(--white)" onclick="closeDeadlinePop()">Got it!</button>
+    <h3 id="deadline-pop-title">2027 Hays County Livestock Show Registration is OPEN!</h3>
+    <p>Enter on <strong>FairEntry</strong> by <strong>Wednesday, December 16 at 11:59 PM CT</strong>.<br>The deadline is strictly enforced. Late entries will not be accepted.</p>
+    <div class="deadline-pop-actions">
+      <a class="hcyls-btn" href="https://hayscountylivestockshow.fairentry.com/" target="_blank" rel="noopener" onclick="closeDeadlinePop()">Register on FairEntry →</a>
+      <button class="later" onclick="closeDeadlinePop()">Remind me later</button>
+    </div>
   </div>
 </div>
 
@@ -1478,59 +1470,50 @@
     </div>
   </section>
 
-  <!-- Bake Sale — hides itself after the sale date (see BAKE_SALE_DATE in the site script) -->
-  <section style="padding-top:18px; padding-bottom:0" id="bake-sale-section">
-    <div class="bake">
-      <div class="bake-ticket">
-        <div class="date-stack">
-          <span class="dow">SUNDAY</span>
-          <span class="mon">November</span>
-          <span class="day">8</span>
-          <span class="bake-time">12 – 4 PM</span>
-          <span class="bake-countdown" id="bake-countdown"></span>
+  <!-- HCYLS 2027 registration — hides itself after the deadline (see HCYLS_DEADLINE in the site script) -->
+  <section style="padding-top:18px; padding-bottom:0" id="hcyls-section">
+    <div class="hcyls">
+      <div class="hcyls-tag-wrap">
+        <div class="hcyls-tag" aria-hidden="true">
+          <div class="lbl">EXHIBITOR</div>
+          <div class="num">2027</div>
+          <div class="show">Hays County<br>Youth Livestock Show</div>
         </div>
-        <div class="drop"><b>📍 Drop-off</b>Murdoch's, 12 – 4 PM</div>
-        <div class="treats" aria-hidden="true">🍪🥧🍞🍰</div>
+        <div class="hcyls-clock" id="hcyls-clock" aria-label="Time left to register">
+          <div><b id="hc-d">–</b><span>Days</span></div>
+          <div><b id="hc-h">–</b><span>Hrs</span></div>
+          <div><b id="hc-m">–</b><span>Min</span></div>
+        </div>
+        <div class="hcyls-clock-cap">until entries close</div>
       </div>
 
-      <div class="bake-main">
-        <div class="bake-kicker">🧁 Calling All Bakers</div>
-        <h2>Wimberley 4-H Bake Sale</h2>
-        <p class="bake-pitch">We need your baked goods! Here's everything you need to know in 3 quick steps.</p>
-        <div class="bake-alert" role="note"><span class="bell" aria-hidden="true">🔔</span><span><b>City of San Marcos health rules apply.</b> Please read all 3 steps before you bake or buy.</span></div>
+      <div class="hcyls-main">
+        <div class="hcyls-kicker"><span class="dot" aria-hidden="true"></span>Registration is now open</div>
+        <h2>Enter the 2027 Hays County Youth Livestock Show</h2>
+        <p class="hcyls-pitch">Every exhibitor must enter online through <strong>FairEntry</strong>. It works on a computer, tablet, or phone, and it handles your entries, check-in, show program, and results.</p>
 
-        <div class="bake-steps" id="bake-rules">
-          <div class="bake-step pick">
-            <span class="ribbon">Easiest</span>
-            <h4>Bring store-bought</h4>
-            <p>Buy a baked good and <strong>leave it in its original package</strong>. It already has every label the city requires, so you're done!</p>
-          </div>
-
-          <div class="bake-step">
-            <h4>Check what's allowed</h4>
-            <div class="bake-chips yes"><span class="lbl">✓ OK:</span><span>Breads</span><span>Cookies</span><span>Cakes</span><span>Fruit pies</span><span>Pastries</span><span>Shelf-stable goods</span></div>
-            <div class="bake-chips no"><span class="lbl">✕ NO:</span><span>Cream pies</span><span>Custard</span><span>Meringue</span><span>Cheesecake</span><span>Meat / seafood</span></div>
-            <p style="font-size:.76rem; opacity:.8">Nothing that needs to be refrigerated or kept warm.</p>
-          </div>
-
-          <div class="bake-step">
-            <h4>Homemade? Label it</h4>
-            <p style="margin-bottom:4px">Wrap or cover <strong>each item</strong>, and label it with:</p>
-            <ul>
-              <li>Your name &amp; address</li>
-              <li>What it is (e.g. "Banana Bread")</li>
-              <li>Allergens (milk, eggs, nuts, wheat…)</li>
-              <li>This exact statement:</li>
-            </ul>
-            <p class="bake-quote">"Made in a home kitchen that is not inspected by the Department of Health Services or local health department."</p>
-          </div>
+        <div class="hcyls-deadline" role="note">
+          <span class="e" aria-hidden="true">⏰</span>
+          <span><b>Deadline: Wednesday, December 16, 2026 at 11:59 PM CT</b>
+          <small>Strictly enforced. FairEntry closes at 11:59 PM and late entries will not be accepted. Register early to avoid last-minute tech trouble.</small></span>
         </div>
 
-        <div class="bake-needs">
-          <span class="t">We also need:</span>
-          <span class="bake-need">🧤 Someone with a current <strong>food handler certificate</strong> on site. Have one? Email us at <strong>wimberley4h@gmail.com</strong></span>
-          <span class="bake-need">🎨 <strong>Table signs &amp; posterboards</strong> pointing shoppers to Murdoch's</span>
+        <div class="hcyls-cta">
+          <a class="hcyls-btn" href="https://hayscountylivestockshow.fairentry.com/" target="_blank" rel="noopener">🐄 Register on FairEntry →</a>
+          <a class="alt" href="http://www.hayscountylivestockshow.org/" target="_blank" rel="noopener">Rule book &amp; show updates ↗</a>
         </div>
+
+        <p class="hcyls-check-h">Before you hit submit</p>
+        <ul class="hcyls-check">
+          <li>Read the <strong>2027 HCYLS Rule Book</strong> and entry requirements</li>
+          <li>Verify exhibitor <strong>name, grade, email &amp; phone</strong></li>
+          <li>Double-check <strong>divisions, classes &amp; projects</strong></li>
+          <li><strong>Save or print</strong> your confirmation</li>
+          <li class="shirt">Order your official <strong>2027 HCYLS T-shirt &amp; hoodie</strong> during registration!</li>
+          <li>Finish <strong>before Dec. 16</strong>. Don't wait until the last night!</li>
+        </ul>
+
+        <p class="hcyls-help">Need help? Email the show at <a href="mailto:hayscountylivestockshow@gmail.com">hayscountylivestockshow@gmail.com</a></p>
       </div>
     </div>
   </section>
@@ -1634,14 +1617,14 @@
           <li data-month="2026-11"><span class="date-label">Nov. 1</span>   Horse Validation Deadline</li>
           <li data-month="2026-11"><span class="date-label">Nov. 5</span>   <span><strong>VFW Thanksgiving Dinner</strong> — we feed the VFW dinner! Sign up to bring a side or dessert on <a href="https://m.signupgenius.com/#!/showSignUp/8050949AFAC29A6F94-66487476-2026?useFullSite=false" target="_blank">SignUpGenius ↗</a>. More details to come.</span></li>
           <li data-month="2026-11"><span class="date-label">Nov. 7</span>   <span class="date-late">LATE</span> Swine Tag Orders Close · Swine Validation, 8–11 AM, DSRP</li>
-          <li data-month="2026-11"><span class="date-label">Nov. 8</span>   <span><strong>🧁 Bake Sale, 12–4 PM</strong> — we need baked goods! Drop-off at Murdoch's, 12–4 PM. <a href="#bake-rules">Read the city bake sale rules</a> before you bake!</span></li>
+          <li data-month="2026-11"><span class="date-label">Nov. 8</span>   <span><strong>🧁 Bake Sale, 12–4 PM</strong> — we need baked goods! Drop-off at Murdoch's, 12–4 PM.</span></li>
           <li data-month="2026-11"><span class="date-label">Nov. 9</span>   <strong>Monthly Club Meeting, 7 PM at VFW — Dress in camo!</strong></li>
           <li data-month="2026-11"><span class="date-label">Nov. 11</span>  <span class="date-late">DEADLINE</span> Major Entry Deadline — all major show entries due!</li>
           <li data-month="2026-11"><span class="date-label">Nov. 11</span>  <span>🦃 Turkey Pick Up, AgriLife Extension Office (200 Stillwater Rd., Ste. 102, Wimberley)<br><em style="font-size:.85rem; color:var(--muted)">*Pick up time announced day of pick up</em></span></li>
           <li data-month="2026-12"><span class="date-label">Dec. 1</span>   <span class="date-late">RSVP DEADLINE</span> December Meeting / Christmas Dinner (Google doc posted to GroupMe)</li>
           <li data-month="2026-12"><span class="date-label">Dec. 11</span>  <span>🐔 Broiler Pick Up<br><em style="font-size:.85rem; color:var(--muted)">*Pick up time announced day of pick up</em></span></li>
           <li data-month="2026-12"><span class="date-label">Dec. 14</span>  <strong>Club Meeting — Ugly Sweater Party!</strong></li>
-          <li data-month="2026-12"><span class="date-label">Dec. 16</span>  <span class="date-late">DEADLINE</span> HCLS Entry Deadline — <strong class="date-late" style="text-transform:uppercase">⚠️ Late fees are $300 per project!</strong></li>
+          <li data-month="2026-12"><span class="date-label">Dec. 16</span>  <span class="date-late">DEADLINE</span> <a href="https://hayscountylivestockshow.fairentry.com/" target="_blank" rel="noopener">HCLS Entry Deadline</a> (FairEntry closes 11:59 PM CT) — <strong class="date-late" style="text-transform:uppercase">⚠️ Late fees are $300 per project!</strong></li>
           <li data-month="2026-12"><span class="date-label">Dec. 18</span>  Deadline to Order Show Pen Signs (Google doc posted to GroupMe)</li>
           <li data-month="2026-12"><span class="date-label">Dec. 19</span>  Rabbit Validation, 8–11 AM, Buda VoAg</li>
         </ul>
@@ -2525,7 +2508,7 @@
   try { if (localStorage.getItem('dates-view') === 'month') setDatesView('month'); } catch (e) {}
 
   // ── Deadline popup — once per visit, stops appearing after the deadline day ──
-  const DEADLINE_POPUP = { id: 'horse-validation-2026', date: '2026-11-01' };
+  const DEADLINE_POPUP = { id: 'hcyls-registration-2027', date: '2026-12-16' };
   function closeDeadlinePop() {
     document.getElementById('deadline-pop').classList.remove('open');
     try { sessionStorage.setItem('seen-' + DEADLINE_POPUP.id, '1'); } catch (e) {}
@@ -2542,15 +2525,20 @@
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDeadlinePop(); });
   })();
 
-  // ── Bake Sale countdown — card hides itself the day after the sale ──
-  const BAKE_SALE_DATE = '2026-11-08';
-  (function bakeSaleCountdown() {
-    const sale = new Date(BAKE_SALE_DATE + 'T00:00:00');
-    const today = new Date(); today.setHours(0, 0, 0, 0);
-    const days = Math.round((sale - today) / 86400000);
-    if (days < 0) { document.getElementById('bake-sale-section').style.display = 'none'; return; }
-    document.getElementById('bake-countdown').textContent =
-      days === 0 ? 'Today!' : days === 1 ? 'Tomorrow!' : `${days} days to go`;
+  // ── HCYLS registration countdown — card hides itself once FairEntry closes ──
+  const HCYLS_DEADLINE = new Date('2026-12-16T23:59:00-06:00');   // 11:59 PM Central
+  (function hcylsCountdown() {
+    const pad = n => String(n).padStart(2, '0');
+    function tick() {
+      const ms = HCYLS_DEADLINE - new Date();
+      if (ms <= 0) { document.getElementById('hcyls-section').style.display = 'none'; return false; }
+      const mins = Math.floor(ms / 60000);
+      document.getElementById('hc-d').textContent = Math.floor(mins / 1440);
+      document.getElementById('hc-h').textContent = pad(Math.floor(mins / 60) % 24);
+      document.getElementById('hc-m').textContent = pad(mins % 60);
+      return true;
+    }
+    if (tick()) setInterval(tick, 30000);
   })();
 
   // ── Flyer Board ──
